@@ -1,0 +1,266 @@
+---
+title: "Claude Code 常见问题"
+description: "Claude Code 常见问题解答"
+---
+
+
+
+> Claude Code 常见问题解答
+
+本页汇总使用 跨界AI 配置 Claude Code 时的常见问题。排查前建议先运行 `claude doctor`，它会检查安装状态和配置文件格式，并给出修复建议
+
+## 安装与更新
+
+> **安装后提示命令未找到**
+>
+> 安装完成后需要**打开一个新的终端窗口**再运行 `claude`
+>
+> 仍然提示命令未找到，说明安装目录没有加入 PATH。官方安装脚本会把 `claude` 安装到以下目录
+>
+> * **macOS/Linux**：`~/.local/bin`
+> * **Windows**：`%USERPROFILE%\.local\bin`
+>
+> **macOS/Linux** 将目录加入 PATH（使用 bash 时把 `~/.zshrc` 换成 `~/.bashrc`）
+>
+> ```bash theme={null}
+> echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+> source ~/.zshrc
+> ```
+>
+> **Windows** 在「系统属性 → 环境变量」中，把 `%USERPROFILE%\.local\bin` 添加到用户变量 `Path`，然后重新打开终端
+>
+> 确认安装成功
+>
+> ```bash theme={null}
+> claude --version
+> ```
+
+> **安装命令报错**
+>
+> * **PowerShell 提示 `The token '&&' is not a valid statement separator`**：你在 PowerShell 中运行了 CMD 命令，改用 `irm https://claude.ai/install.ps1 | iex`
+> * **CMD 提示 `'irm' is not recognized`**：你在 CMD 中运行了 PowerShell 命令，改用 CMD 安装命令
+> * **`curl` 报错、返回 `403` 或 `syntax error near unexpected token '<'`**：通常是网络无法访问 `claude.ai`，请检查网络后重试，或改用 Homebrew、WinGet 安装
+>
+> 更多情况参考 [官方安装排查文档](https://code.claude.com/docs/en/troubleshoot-install)
+
+> **如何更新 Claude Code**
+>
+> **官方安装脚本**
+>
+> 默认会在后台自动更新。如果按本文档配置了 `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`，自动更新会被关闭，需要手动更新
+>
+> ```bash theme={null}
+> claude update
+> ```
+>
+> **Homebrew**
+>
+> ```bash theme={null}
+> # 安装的是 claude-code（稳定版）
+> brew upgrade claude-code
+> # 安装的是 claude-code@latest（最新版）
+> brew upgrade claude-code@latest
+> ```
+>
+> **WinGet**
+>
+> ```powershell theme={null}
+> winget upgrade Anthropic.ClaudeCode
+> ```
+>
+> > [!TIP]
+> >
+> > 使用 Homebrew 或 WinGet 时，可以在 `settings.json` 的 `env` 中加入 `"CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE": "1"`，让 Claude Code 在有新版本时自动调用包管理器更新
+
+> **Windows 需要安装 Git 吗**
+>
+> 不是必须的。Claude Code 可以直接在 PowerShell 或 CMD 中安装和运行
+>
+> * **未安装 Git for Windows**：Claude Code 使用 PowerShell 执行命令
+> * **已安装 [Git for Windows](https://git-scm.com/downloads/win)**：Claude Code 使用 Git Bash 执行命令，兼容性更好
+>
+> 已安装 Git 但 Claude Code 找不到 Git Bash 时，在 `settings.json` 的 `env` 中指定路径
+>
+> ```json theme={null}
+> {
+>   "env": {
+>     "CLAUDE_CODE_GIT_BASH_PATH": "C:\\Program Files\\Git\\bin\\bash.exe"
+>   }
+> }
+> ```
+>
+> 也可以在 WSL 中按 Linux 方式安装使用
+
+## 配置问题
+
+> **配置文件在哪里**
+>
+> * **macOS/Linux**：`~/.claude/settings.json`
+> * **Windows**：`C:\Users\你的用户名\.claude\settings.json`
+>
+> 该文件对所有项目生效。不要把 API Key 写进项目目录下的 `.claude/settings.json`，该文件通常会提交到代码仓库
+
+> **请求地址配置**
+>
+> Claude Code 使用 Anthropic 格式，请求地址**不包含** `/v1` 路径
+>
+> ```text theme={null}
+> https://api.kuajieaigc.com
+> ```
+
+> **如何确认配置已生效**
+>
+> 启动 `claude` 后输入 `/status`，查看 **Status** 页
+>
+> * `Anthropic base URL` 显示 `https://api.kuajieaigc.com`：请求地址已生效。没有这一行说明请求地址没有读取到
+>
+> * `Auth token` 显示 `ANTHROPIC_AUTH_TOKEN`：API Key 已生效。如果显示的是 `Login method` 和 claude.ai 账号，说明 API Key 没有读取到
+>
+> > [!NOTE]
+> >
+> > `settings.json` 中的配置优先级高于终端里 `export` 的同名环境变量，以 `/status` 显示的结果为准
+
+> **API 连接失败**
+>
+> 先在终端中直接测试请求地址和 API Key 是否可用，把 `your-api-key-here` 换成你的 API Key
+>
+> **macOS/Linux**
+>
+> ```bash theme={null}
+> curl -sS -w '\n%{http_code}\n' -X POST "https://api.kuajieaigc.com/v1/messages" \
+>   -H "Authorization: Bearer your-api-key-here" \
+>   -H "anthropic-version: 2023-06-01" \
+>   -H "content-type: application/json" \
+>   -d '{"model": "your-claude-model-id", "max_tokens": 1, "messages": [{"role": "user", "content": "."}]}'
+> ```
+>
+> **Windows (PowerShell)**
+>
+> ```powershell theme={null}
+> Invoke-RestMethod -Method Post -Uri "https://api.kuajieaigc.com/v1/messages" `
+>   -Headers @{ "Authorization" = "Bearer your-api-key-here"; "anthropic-version" = "2023-06-01" } `
+>   -ContentType "application/json" `
+>   -Body '{"model": "your-claude-model-id", "max_tokens": 1, "messages": [{"role": "user", "content": "."}]}'
+> ```
+>
+> * 返回以 `{"id":"msg_` 开头的 JSON，或提示模型不存在：网络和 API Key 都正常，请检查 `settings.json`
+> * 返回 `401`：API Key 无效，参考下方「API Key 无效」
+> * 连接超时或无法解析域名：检查网络，关闭代理后重试，或确认使用 `https://api.kuajieaigc.com`
+
+> **启动时提示 Auth conflict 或 auth may not work as expected**
+>
+> 你之前登录过 claude.ai 账号，同时又配置了 API Key，两种凭证同时存在
+>
+> 在 Claude Code 中运行 `/logout` 退出 claude.ai 账号，只保留 API Key 即可
+
+## 使用问题
+
+> **已配置 API Key 仍要求登录**
+>
+> 确认 `ANTHROPIC_AUTH_TOKEN` 写在用户目录的 `~/.claude/settings.json` 中，而不是项目目录下的 `.claude/settings.json`。项目级配置要在首次引导和信任目录确认之后才会生效
+
+> **无法连接到 Anthropic 服务**
+>
+> 如果出现以下错误
+>
+> ```text theme={null}
+> Unable to connect to Anthropic services
+> Failed to connect to api.anthropic.com
+> ```
+>
+> **解决方法**
+>
+> 在 `~/.claude.json` 中写入 `"hasCompletedOnboarding": true`，跳过初次登录引导
+>
+> > [!WARNING]
+> >
+> > 该字段写在用户目录下的 `~/.claude.json`，不是 `~/.claude/settings.json`，不要覆盖 `settings.json`，否则 API Key 配置会丢失
+>
+> **macOS/Linux**
+>
+> ```bash theme={null}
+> node -e 'const fs=require("fs"),f=require("os").homedir()+"/.claude.json";const j=fs.existsSync(f)?JSON.parse(fs.readFileSync(f,"utf8")):{};j.hasCompletedOnboarding=true;fs.writeFileSync(f,JSON.stringify(j,null,2))'
+> ```
+>
+> **Windows (PowerShell)**
+>
+> ```powershell theme={null}
+> $f="$env:USERPROFILE\.claude.json"
+> $j=if (Test-Path $f) { Get-Content $f -Raw | ConvertFrom-Json } else { [pscustomobject]@{} }
+> $j | Add-Member -NotePropertyName 'hasCompletedOnboarding' -NotePropertyValue $true -Force
+> $j | ConvertTo-Json -Depth 100 | Set-Content $f -Encoding UTF8
+> ```
+>
+> 未安装 Node.js 时，也可以用文本编辑器打开 `~/.claude.json`，在最外层花括号内手动添加该字段；文件不存在时新建即可
+>
+> 完成后重新运行 `claude`
+
+> **VS Code 扩展一直要求登录**
+>
+> VS Code 扩展的登录检查不读取 `~/.claude/settings.json`，需要在 VS Code 用户设置中单独配置，参考 [在 VS Code 中使用](/claude-code/introduction#在-vs-code-中使用)
+
+> **如何切换模型**
+>
+> **会话中切换**：输入 `/model`，从列表中选择模型
+>
+> **指定默认模型**：在 `~/.claude/settings.json` 的 `env` 中加入 `ANTHROPIC_MODEL`，例如
+>
+> ```json theme={null}
+> {
+>   "env": {
+>     "ANTHROPIC_MODEL": "your-claude-model-id"
+>   }
+> }
+> ```
+>
+> **启动时指定**：
+>
+> ```bash theme={null}
+> claude --model your-claude-model-id
+> ```
+
+> **部分功能不可用**
+>
+> 使用 跨界AI 时，以下依赖 claude.ai 账号的功能不可用，属于正常现象
+>
+> * Remote Control（远程控制）
+> * 语音输入
+> * Claude Code 网页版、Slack 集成等云端功能
+
+> **首次启动很慢**
+>
+> 首次启动时 Claude Code 需要初始化配置，这是正常现象。后续启动会快很多
+
+> **常用命令**
+>
+> | 命令 | 功能说明 |
+> | - | - |
+> | `claude` | 启动交互式会话 |
+> | `claude "问题"` | 带初始问题启动 |
+> | `claude -p "问题"` | 一次性问答模式 |
+> | `claude -c` | 继续最近会话 |
+> | `claude --version` | 查看版本 |
+> | `claude doctor` | 检查安装和配置 |
+> | `claude update` | 更新到最新版本 |
+> | `/status` | 会话中查看当前请求地址和凭证 |
+> | `/model` | 会话中切换模型 |
+> | `/logout` | 退出 claude.ai 账号 |
+
+## 错误排查
+
+> **API Key 无效**
+>
+> * 确认 API Key 已正确复制（无多余空格）
+> * 确认使用的是 `ANTHROPIC_AUTH_TOKEN`，不是 `ANTHROPIC_API_KEY`
+> * 检查 API Key 是否在有效期内、额度是否用完
+> * Claude Code 使用 `https://api.kuajieaigc.com`（无 `/v1`）
+
+> **SSL 证书错误**
+>
+> 出现 `SSL certificate verification failed` 或 `Self-signed certificate detected`，通常是公司网络或代理软件拦截了 HTTPS 连接。关闭代理后重试，或联系网络管理员
+
+## 其他问题
+
+> **[跨界AI官网](https://www.kuajieaigc.com)**
+>
+> 如果以上方法无法解决问题，请联系技术支持

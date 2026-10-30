@@ -1,0 +1,77 @@
+---
+title: "配置 CLI"
+description: "为 Codex、Claude Code、Gemini CLI 配置 跨界AI"
+---
+
+
+
+> 为 Codex、Claude Code、Gemini CLI 配置 跨界AI
+
+创建 API Key 后，按以下两步让命令行工具使用 跨界AI：先安装 CLI，再写入请求地址和 API Key
+
+## 第一步：安装 CLI
+
+选择你要使用的工具，按对应页面完成安装
+
+> **[Codex](/codex/introduction)**
+>
+> Homebrew、官方脚本或 npm 安装
+
+> **[Claude Code](/claude-code/introduction)**
+>
+> 官方安装脚本一键安装，不需要 Node.js
+
+> **[Gemini CLI](/gemini/introduction)**
+>
+> Homebrew 或 npm 安装
+
+> [!NOTE]
+>
+> 使用 npm 安装时需要先准备 [Node.js 环境](/environment/setup)
+
+> [!TIP]
+>
+> 不习惯命令行？可以使用图形界面的 [Claude Desktop](/claude-desktop/introduction)、[ChatGPT 桌面应用](/codex/chatgpt-app) 或 [VS Code 插件](/codex/vscode)，也可以使用 [Cherry Studio](/clients/cherry-studio)、[Chatbox](/clients/chatbox) 等客户端
+
+## 第二步：配置请求地址和 API Key
+
+两种方式任选其一
+
+> **[CC-Switch 可视化配置（推荐）](/cc-switch/usage)**
+>
+> 通过图形界面统一管理 Codex、Claude Code、Gemini CLI 的配置，无需手动编辑文件
+
+> **手动编辑配置文件**
+>
+> 每个工具的「安装与配置」页都提供了完整的配置文件示例，适合想了解配置细节的用户
+
+各工具的请求地址不同，配置时注意区分。具体可用模型和模型 ID 请以[模型广场](https://www.kuajieaigc.com/pricing)当前展示为准。
+
+| 工具 | 请求地址 |
+| - | - |
+| Codex / ChatGPT 桌面应用 / VS Code 插件 | `https://api.kuajieaigc.com/v1` |
+| Claude Code | `https://api.kuajieaigc.com` |
+| Claude Desktop | `https://api.kuajieaigc.com` |
+| Gemini CLI | `https://api.kuajieaigc.com` |
+
+## 请求地址
+
+当前统一使用 `https://api.kuajieaigc.com`。不同工具的路径规则请以本页配置示例为准。
+
+## 遇到问题
+
+> **[Codex 常见问题](/codex/faq)**
+>
+> 安装、配置与错误排查
+
+> **[Claude Code 常见问题](/claude-code/faq)**
+>
+> 安装、配置与错误排查
+
+> **[Claude Desktop 常见问题](/claude-desktop/faq)**
+>
+> 配置与错误排查
+
+> **[Gemini CLI 常见问题](/gemini/faq)**
+>
+> 安装、配置与错误排查

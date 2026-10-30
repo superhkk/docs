@@ -1,0 +1,126 @@
+---
+title: "Node.js 环境配置"
+description: "通过 npm 安装 Codex、Gemini CLI 前的 Node.js 环境准备"
+---
+
+
+
+> 通过 npm 安装 Codex、Gemini CLI 前的 Node.js 环境准备
+
+## 什么时候需要
+
+通过 npm 安装 Codex 或 Gemini CLI 时，需要先安装 Node.js。以下情况可以跳过本页
+
+* 只使用 Claude Code（官方安装脚本、Homebrew、WinGet 均不依赖 Node.js）
+* 使用 Homebrew 安装 Codex、Gemini CLI，或使用官方安装脚本安装 Codex
+
+## 配置步骤
+
+### 步骤一：安装 Node.js
+
+通过 npm 安装 Codex 和 Gemini CLI 需要 Node.js 18 或更高版本。Claude Code 使用官方安装脚本、Homebrew 或 WinGet 安装，不依赖 Node.js
+
+> [!NOTE]
+>
+> **如果你已安装 Node.js 18 或更高版本，可跳过本步骤**
+>
+> 需要更详细的安装教程？参考 [菜鸟教程 - Node.js 安装配置](https://www.runoob.com/nodejs/nodejs-install-setup.html)
+
+**macOS**
+
+**方法一：使用 Homebrew（推荐）**
+
+```bash theme={null}
+# 更新 Homebrew
+brew update
+# 安装 Node.js
+brew install node
+```
+
+**方法二：官网下载**
+
+1. 访问 [Node.js 官网](https://nodejs.org)
+2. 下载 LTS 版本的 `.pkg` 安装包
+3. 运行安装程序并按照提示完成安装
+
+**Windows**
+
+**方法一：使用官方安装包（推荐）**
+
+1. 访问 [Node.js 官网](https://nodejs.org)
+2. 下载 LTS 版本的 Windows Installer `.msi`
+3. 运行安装程序，按默认设置完成安装
+4. 安装程序会自动添加到 PATH 环境变量
+
+**方法二：使用包管理器**
+
+使用 Winget（Windows 11 或 Windows 10 自带）：
+
+```powershell theme={null}
+winget install OpenJS.NodeJS.LTS
+```
+
+使用 Chocolatey：
+
+```powershell theme={null}
+choco install nodejs-lts
+```
+
+使用 Scoop：
+
+```powershell theme={null}
+scoop install nodejs-lts
+```
+
+**Linux**
+
+**Ubuntu/Debian：**
+
+```bash theme={null}
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+**其他发行版**请参考 [Node.js 官方文档](https://nodejs.org/en/download/package-manager)
+
+### 步骤二：确认环境已就绪
+
+**验证安装：**
+
+```bash theme={null}
+node --version && npm --version
+```
+
+应该显示 Node.js 和 npm 的版本号
+
+**检查全局包：**
+
+```bash theme={null}
+npm list -g --depth=0
+```
+
+**正常情况：**
+
+* 显示已安装的全局包列表（没有任何内容也没关系）
+
+**异常情况：**
+
+* 如果提示「命令未找到」，说明 Node.js 未正确安装或未添加到环境变量
+
+## 下一步
+
+Node.js 环境配置完成后，安装你要使用的 CLI 工具
+
+> **[Codex](/codex/introduction)**
+>
+> 安装和配置 Codex
+
+> **[Claude Code](/claude-code/introduction)**
+>
+> 安装和配置 Claude Code
+
+> **[Gemini CLI](/gemini/introduction)**
+>
+> 安装和配置 Gemini CLI
+
+安装完成后，可以使用 [CC-Switch](/cc-switch/usage) 通过图形界面管理配置

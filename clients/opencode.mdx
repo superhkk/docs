@@ -1,0 +1,87 @@
+---
+title: "OpenCode 配置"
+description: "在开源终端编程助手 OpenCode 中使用 跨界AI"
+---
+
+
+
+> 在开源终端编程助手 OpenCode 中使用 跨界AI
+
+[OpenCode](https://opencode.ai) 是一款开源的终端 AI 编程助手。按本页添加自定义供应商后，即可在 OpenCode 中使用 跨界AI 的 GPT 模型
+
+## 安装
+
+按 [OpenCode 官方文档](https://opencode.ai/docs/) 完成安装，安装后运行以下命令确认成功
+
+```bash theme={null}
+opencode --version
+```
+
+## 创建 API Key
+
+在控制台 [创建 API Key](/quickstart/api-key) 时，「厂商」选择「OpenAI」
+
+## 配置
+
+编辑配置文件，文件不存在时新建即可
+
+* **macOS/Linux**：`~/.config/opencode/opencode.json`
+* **Windows**：`C:\Users\你的用户名\.config\opencode\opencode.json`
+
+写入以下内容，将 `your-api-key-here` 替换为你的 API Key
+
+```json opencode.json theme={null}
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "kuajieai": {
+      "npm": "@ai-sdk/openai",
+      "name": "跨界AI",
+      "options": {
+        "baseURL": "https://api.kuajieaigc.com/v1",
+        "apiKey": "your-api-key-here",
+        "setCacheKey": true
+      },
+      "models": {
+        "your-model-id": {
+          "name": "模型列表中的名称",
+          "options": {
+            "store": false,
+            "reasoningEffort": "xhigh",
+            "textVerbosity": "high",
+            "reasoningSummary": "auto",
+            "include": ["reasoning.encrypted_content"]
+          }
+        }
+      }
+    }
+  },
+  "model": "kuajieai/your-model-id"
+}
+```
+
+> [!WARNING]
+>
+> `baseURL` **必须**以 `/v1` 结尾
+
+## 使用
+
+在项目目录中运行 `opencode`，输入 `/models` 可以确认当前使用的是 跨界AI 下的模型，发送消息能正常回复即表示配置完成
+
+```bash theme={null}
+opencode
+```
+
+## 常见问题
+
+> **模型列表中没有 跨界AI**
+>
+> 确认 `opencode.json` 是合法的 JSON（没有多余逗号），并且位于上方所列路径，然后重新启动 OpenCode
+
+> **提示 401 或认证失败**
+>
+> 确认 `apiKey` 填写正确，并且创建 API Key 时厂商选择的是「OpenAI」
+
+> **连接超时或无法访问**
+>
+> 确认 `baseURL` 使用 `https://api.kuajieaigc.com/v1`

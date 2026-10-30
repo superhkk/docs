@@ -1,33 +1,34 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
+# 跨界 AI 文档维护约定
 
-# Documentation project instructions
+本仓库是跨界 AI 的中文 Mintlify 文档站，部署域名为 `docs.kuajieaigc.com`。
 
-## About this project
+## 站点信息
 
-- This is a documentation site built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Use the Mintlify MCP server, `https://mcp.mintlify.com`, to edit content and settings via MCP
-- Use the Mintlify docs MCP server, `https://www.mintlify.com/docs/mcp`, to query information about using Mintlify via MCP
+- 品牌名称：跨界AI
+- 品牌标语：大国重器·AI让生活更美好
+- 官网与控制台：`https://www.kuajieaigc.com`
+- 模型价格与当前模型 ID：`https://www.kuajieaigc.com/pricing`
+- API 请求入口：`https://api.kuajieaigc.com`
+- 文档站配置：`docs.json`
 
-## Terminology
+## 写作规则
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+- 面向中文开发者，用简洁、直接的步骤说明。
+- 操作流程按控制台当前页面与仓库代码核实后再写。
+- 不写未经核实的模型 ID、价格、支付渠道、退款政策、客服联系方式、备用域名或性能承诺。
+- 示例中使用 `your-api-key-here` 和 `your-model-id` 等占位符，并说明到模型广场复制实际模型 ID。
+- API 路径示例使用 `api.kuajieaigc.com`；官网、注册、价格与账户入口使用 `www.kuajieaigc.com`。
+- 外部客户端设置链接到其官方文档，不把第三方产品说成跨界 AI 自有功能。
+- 页面正文由 frontmatter 的 `title` 显示，不重复添加相同的首个 H1。
+- 不写入、提交或展示部署密钥、API Key、访问令牌或其他凭证。
 
-## Style preferences
+## 检查
 
-{/* Add any project-specific style rules below */}
+在仓库根目录运行：
 
-- Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
-- Use sentence case for headings
-- Bold for UI elements: Click **Settings**
-- Code formatting for file names, commands, paths, and code references
+```bash
+mint validate
+mint broken-links
+```
 
-## Content boundaries
-
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+新页面需添加到 `docs.json` 导航。发布前检查内部链接、Logo、站点品牌、官网入口和 API 域名。

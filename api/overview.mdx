@@ -1,0 +1,144 @@
+---
+title: "在代码中调用"
+description: "通过 HTTP 请求或官方 SDK 在自己的代码中调用 跨界AI"
+---
+
+
+
+> 通过 HTTP 请求或官方 SDK 在自己的代码中调用 跨界AI
+
+除了在工具中使用，你也可以在自己的程序里直接调用 跨界AI。接口与官方格式兼容，只需替换请求地址和 API Key
+
+## 接口格式
+
+| 模型 | 接口 | 请求地址 | API Key 厂商 |
+| - | - | - | - |
+| GPT 系列 | OpenAI Responses | `https://api.kuajieaigc.com/v1/responses` | OpenAI |
+| Claude 系列 | Anthropic Messages | `https://api.kuajieaigc.com/v1/messages` | Anthropic |
+
+请求头通过 `Authorization: Bearer your-api-key-here` 传入 API Key，Anthropic Messages 也支持 `x-api-key` 请求头
+
+## OpenAI Responses
+
+**curl**
+
+```bash theme={null}
+curl https://api.kuajieaigc.com/v1/responses \
+  -H "Authorization: Bearer your-api-key-here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "your-model-id",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": [
+          { "type": "input_text", "text": "hi" }
+        ]
+      }
+    ]
+  }'
+```
+
+> [!NOTE]
+>
+> `input` 需要使用数组格式，如上例所示
+
+**Python**
+
+先安装官方 SDK：`pip install openai`
+
+```python theme={null}
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.kuajieaigc.com/v1",
+    api_key="your-api-key-here",
+)
+
+response = client.responses.create(
+    model="your-model-id"  # 从模型广场复制实际模型 ID,
+    input=[{"role": "user", "content": "hi"}],
+)
+print(response.output_text)
+```
+
+**Node.js**
+
+先安装官方 SDK：`npm install openai`
+
+```javascript theme={null}
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  baseURL: "https://api.kuajieaigc.com/v1",
+  apiKey: "your-api-key-here",
+});
+
+const response = await client.responses.create({
+  model: "your-model-id",
+  input: [{ role: "user", content: "hi" }],
+});
+console.log(response.output_text);
+```
+
+## Anthropic Messages
+
+使用 Anthropic SDK 时，请求地址**不加** `/v1`，SDK 会自动补全
+
+**Python**
+
+先安装官方 SDK：`pip install anthropic`
+
+```python theme={null}
+from anthropic import Anthropic
+
+client = Anthropic(
+    base_url="https://api.kuajieaigc.com",
+    api_key="your-api-key-here",
+)
+
+message = client.messages.create(
+    model="your-claude-model",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "hi"}],
+)
+print(message.content[0].text)
+```
+
+**Node.js**
+
+先安装官方 SDK：`npm install @anthropic-ai/sdk`
+
+```javascript theme={null}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic({
+  baseURL: "https://api.kuajieaigc.com",
+  apiKey: "your-api-key-here",
+});
+
+const message = await client.messages.create({
+  model: "your-claude-model",
+  max_tokens: 1024,
+  messages: [{ role: "user", content: "hi" }],
+});
+console.log(message.content[0].text);
+```
+
+将 `your-claude-model` 替换为要使用的 Claude 模型 ID
+
+## 常见问题
+
+> **提示 401 或 API\_KEY\_REQUIRED**
+>
+> * 确认请求头中带有 `Authorization: Bearer your-api-key-here`
+> * 确认 API Key 的厂商与调用的模型一致：GPT 用「OpenAI」，Claude 用「Anthropic」
+
+> **提示 404**
+>
+> 检查请求地址：OpenAI SDK 的 `base_url` 需要以 `/v1` 结尾，Anthropic SDK 的 `base_url` 不加 `/v1`
+
+> **连接超时或无法访问**
+>
+> 确认使用 `https://api.kuajieaigc.com`，路径规则不变

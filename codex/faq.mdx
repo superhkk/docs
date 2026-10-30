@@ -1,0 +1,271 @@
+---
+title: "Codex 常见问题"
+description: "Codex 常见问题解答"
+---
+
+
+
+> Codex 常见问题解答
+
+## 安装与更新
+
+> **命令未找到**
+>
+> 安装完成后需要**打开一个新的终端窗口**再运行 `codex`
+>
+> **官方安装脚本或 Homebrew**：重新运行一次安装命令
+>
+> ```bash theme={null}
+> # 官方安装脚本（macOS/Linux）
+> curl -fsSL https://chatgpt.com/codex/install.sh | sh
+> # Homebrew
+> brew install --cask codex
+> ```
+>
+> **NPM 安装**
+>
+> 确保 npm 全局路径已添加到 PATH
+>
+> ```bash theme={null}
+> npm config get prefix
+> # 添加到 PATH
+> echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.zshrc
+> source ~/.zshrc
+> ```
+
+> **如何更新 Codex**
+>
+> **官方安装脚本**：重新运行安装命令即可更新到最新版
+>
+> ```bash theme={null}
+> # macOS/Linux
+> curl -fsSL https://chatgpt.com/codex/install.sh | sh
+> ```
+>
+> ```powershell theme={null}
+> # Windows PowerShell
+> powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"
+> ```
+>
+> **Homebrew**
+>
+> ```bash theme={null}
+> brew upgrade --cask codex
+> ```
+>
+> **NPM**
+>
+> ```bash theme={null}
+> npm i -g @openai/codex@latest --registry=https://registry.npmmirror.com
+> ```
+
+> **安装失败**
+>
+> **排查步骤**
+>
+> 1. 检查网络连接。官方安装脚本需要访问 `chatgpt.com`，无法访问时改用 NPM 国内镜像
+> 2. 确保 Node.js 18+ 已安装（NPM 方式）
+> 3. 使用镜像源：
+>    ```bash theme={null}
+>    npm i -g @openai/codex --registry=https://registry.npmmirror.com
+>    ```
+
+> **Windows 安装**
+>
+> Codex 支持原生 Windows，在 PowerShell 中运行官方安装脚本
+>
+> ```powershell theme={null}
+> powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"
+> ```
+>
+> 也可以在 WSL 中按 Linux 方式安装，此时配置文件位于 WSL 内的 `~/.codex/`
+
+## 配置问题
+
+> **配置文件在哪里**
+>
+> * **macOS/Linux**：`~/.codex/`
+> * **Windows**：`C:\Users\你的用户名\.codex\`（在 WSL 中使用时为 WSL 内的 `~/.codex/`）
+>
+> 需要两个文件：`config.toml` 和 `auth.json`
+
+> **请求地址配置**
+>
+> Codex 使用 OpenAI 兼容格式，请求地址**必须包含** `/v1` 路径
+>
+> ```toml theme={null}
+> base_url = "https://api.kuajieaigc.com/v1"
+> ```
+
+> **API Key 配置**
+>
+> `auth.json` 中应使用完整的 API Key，不是环境变量名
+>
+> **正确示例**
+>
+> ```json theme={null}
+> {
+>   "OPENAI_API_KEY": "your-api-key-here"
+> }
+> ```
+>
+> **错误示例**
+>
+> ```json theme={null}
+> {
+>   "OPENAI_API_KEY": "CODEX_API_KEY"
+> }
+> ```
+
+> **Windows 特殊配置**
+>
+> Windows 用户可在 `config.toml` 开头添加以下配置，跳过首次启动时的 Windows 引导提示
+>
+> ```toml theme={null}
+> windows_wsl_setup_acknowledged = true
+> ```
+
+> **开启网络搜索**
+>
+> 在 `config.toml` 开头添加
+>
+> ```toml theme={null}
+> web_search = "live"
+> ```
+>
+> 可选值：`"live"`（实时联网搜索）、`"cached"`（默认，使用缓存索引）、`"disabled"`（关闭搜索）
+>
+> > [!NOTE]
+> >
+> > 旧版写法 `[features] web_search_request = true` 已弃用，请改用 `web_search`
+
+> **配置全局提示词**
+>
+> 在 `~/.codex` 目录创建 `AGENTS.md` 文件，写入自定义提示词后重启生效
+
+## 模型使用
+
+> **如何切换模型**
+>
+> **方法一：修改配置文件（推荐）**
+>
+> 1. 打开 `config.toml`，修改 `model` 的值，例如 `model = "your-model-id" # 从模型广场复制实际模型 ID`
+> 2. 保存后重启 Codex
+>
+> **方法二：CLI 启动参数**
+>
+> ```bash theme={null}
+> codex -m your-model-id -c model_reasoning_effort="xhigh"
+> ```
+>
+> **方法三：会话中切换**
+>
+> 在 Codex 对话界面输入 `/model`，选择要使用的模型
+
+> **模型列表中看不到最新模型**
+>
+> 通过 API Key 接入时，`/model` 列表和插件的下拉列表可能不显示最新模型，属于正常现象。直接修改 `config.toml` 中的 `model` 字段，或用 `codex -m` 指定模型启动即可
+>
+> > [!NOTE]
+> >
+> > 修改配置后不要再在会话中手动切换模型，否则需要重新启动 Codex 才能恢复配置文件中的模型
+
+> **常用命令**
+>
+> | 命令 | 说明 |
+> | - | - |
+> | `/model` | 选择模型 |
+> | `/review` | 审查变更 |
+> | `/resume` | 继续历史会话 |
+> | `/compact` | 压缩上下文 |
+> | `/undo` | 撤销操作 |
+> | `/mcp` | 查看 MCP 工具 |
+
+## 错误排查
+
+> **Connection failed**
+>
+> **排查步骤**
+>
+> 1. 检查本机网络是否通畅
+> 2. 关闭代理工具
+> 3. 将 `base_url` 确认使用 `https://api.kuajieaigc.com`，末尾保留 `/v1`
+> 4. 在 CLI 中测试是否为 VS Code 插件问题
+> 5. 重启 VS Code
+
+> **401 错误**
+>
+> **检查环境变量冲突**
+>
+> 系统中已有的 `OPENAI_API_KEY`、`OPENAI_BASE_URL` 环境变量可能覆盖配置文件
+>
+> **macOS/Linux/WSL**
+>
+> ```bash theme={null}
+> env | grep OPENAI
+> ```
+>
+> 如有输出，从 `~/.zshrc` 或 `~/.bashrc` 中删除对应的 `export` 行，然后重新打开终端
+>
+> **Windows（CMD）**
+>
+> ```bat theme={null}
+> echo %OPENAI_API_KEY%
+> echo %OPENAI_BASE_URL%
+> ```
+>
+> 如有输出，清除环境变量后重新打开终端
+>
+> ```bat theme={null}
+> setx OPENAI_API_KEY ""
+> setx OPENAI_BASE_URL ""
+> ```
+>
+> **检查配置文件**
+>
+> * `~/.codex/auth.json` 中的 API Key 是否正确
+> * `~/.codex/config.toml` 中的 base\_url 是否包含 `/v1`
+
+> **403 错误**
+>
+> 通常是号池账号问题
+>
+> 1. 停止当前对话（Ctrl+C）
+> 2. 重新发起对话
+> 3. 如果重试 3 次以上无效，联系技术支持
+
+> **Windows 乱码问题**
+>
+> **解决步骤**
+>
+> 1. 按 `Win + R`，输入 `intl.cpl` 回车
+> 2. 点击「管理」选项卡
+> 3. 点击「更改系统区域设置」
+> 4. 勾选「Beta: 使用 Unicode UTF-8 提供全球语言支持」
+> 5. 确定后重启电脑
+>
+> 也可以将 PowerShell 升级到 7 或以上版本，或改用 Windows Terminal
+
+> **回复中出现广告或会话被打断**
+>
+> 这是上游模型偶发的问题，并非 跨界AI 写入的内容，可参考 OpenAI 官方的 [相关讨论](https://github.com/openai/codex/issues/13114)。遇到时重新发起对话即可
+
+> **响应速度慢**
+>
+> * Codex 模型本身推理时间较长，`model_reasoning_effort` 越高越慢，可以按需调低为 `"medium"`
+> * 网络问题时，尝试关闭或切换代理，或将 `base_url` 切换到 [API 地址](/quickstart/cli-setup#请求地址)
+
+## 聊天记录
+
+> **切换到 跨界AI 后看不到之前的聊天记录**
+>
+> Codex 的聊天记录保存在本地，并按 `model_provider` 区分
+>
+> * **之前用 ChatGPT 账号登录**：切换到 API Key 后看不到原账号的记录。需要时可以先切回原账号，让 Codex 总结并导出
+> * **之前用其他中转服务**：把 `config.toml` 中的 `model_provider` 改成与之前一致，即可继续看到原来的记录
+
+## 其他问题
+
+> **[跨界AI官网](https://www.kuajieaigc.com)**
+>
+> 如果以上方法无法解决问题，请联系技术支持

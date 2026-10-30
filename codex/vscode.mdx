@@ -1,0 +1,85 @@
+---
+title: "VS Code 插件安装与配置"
+description: "在 VS Code、Cursor、Trae 中通过 Codex 插件使用 跨界AI"
+---
+
+
+
+> 在 VS Code、Cursor、Trae 中通过 Codex 插件使用 跨界AI
+
+Codex 提供 VS Code 插件，同样可以在 Cursor、Trae 等基于 VS Code 的编辑器中安装。插件和 Codex 命令行工具共用 `config.toml` 和 `auth.json`，按你的情况选择下面一种方式
+
+## 方式一：已配置 Codex CLI
+
+如果你已经按 [Codex 安装与配置](/codex/introduction) 配置好了命令行工具，只需安装插件
+
+**1. 安装插件**
+
+在编辑器的扩展商店搜索「Codex」，安装 OpenAI 官方发布的插件
+
+**2. 打开插件**
+
+安装完成后，在左侧活动栏点击 Codex 图标打开。左侧找不到时，在编辑器右上角查找
+
+插件会自动读取已有配置，发送一条消息能正常回复即表示配置完成
+
+## 方式二：仅安装插件
+
+不想安装 Codex CLI 时，可以只用插件
+
+**1. 安装插件**
+
+在编辑器的扩展商店搜索「Codex」，安装 OpenAI 官方发布的插件
+
+**2. 使用 API Key 登录**
+
+打开插件，如果之前用 ChatGPT 账号或其他平台登录过，先退出登录。选择「Use API Key」，填入你在控制台 [创建的 API Key](/quickstart/api-key)，「厂商」需选择「OpenAI」
+
+**3. 编辑配置文件**
+
+点击插件右上角的设置图标，选择「Codex 设置」→「打开 config.toml」，将内容替换为以下配置并保存
+
+```toml config.toml theme={null}
+model_provider = "OpenAI"
+model = "your-model-id" # 从模型广场复制实际模型 ID
+model_reasoning_effort = "xhigh"
+disable_response_storage = true
+model_verbosity = "high"
+network_access = true
+
+[model_providers.OpenAI]
+name = "OpenAI"
+base_url = "https://api.kuajieaigc.com/v1"
+wire_api = "responses"
+requires_openai_auth = true
+```
+
+> [!WARNING]
+>
+> Codex 的请求地址**必须**以 `/v1` 结尾
+
+**4. 重启编辑器**
+
+完全退出编辑器后重新打开，配置才会生效
+
+## 常见问题
+
+> **配置后插件仍无法使用**
+>
+> 1. 完全退出编辑器后重新打开
+> 2. 仍无法使用时，点击插件右上角设置图标 →「Codex 设置」→「打开 config.toml」，确认内容与上方配置一致，保存后再次重启
+> 3. 仍不生效时，在当前项目根目录新建 `.codex` 文件夹，放入同样的 `config.toml` 和 `auth.json`
+
+> **模型下拉列表里没有最新模型**
+>
+> 通过 API Key 接入时，下拉列表可能不显示最新模型，属于正常现象。直接修改 `config.toml` 中的 `model` 字段并重启编辑器即可
+>
+> > [!NOTE]
+> >
+> > 修改配置后不要再在插件里手动切换模型，否则会覆盖配置文件中的模型
+
+> **Connection failed 或连接超时**
+>
+> 确认 `base_url` 使用 `https://api.kuajieaigc.com/v1`，然后重启编辑器
+
+更多问题参考 [Codex 常见问题](/codex/faq)

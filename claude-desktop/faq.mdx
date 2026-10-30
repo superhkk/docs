@@ -1,0 +1,48 @@
+---
+title: "Claude Desktop 常见问题"
+description: "Claude Desktop 常见问题解答"
+---
+
+
+
+> Claude Desktop 常见问题解答
+
+本页汇总在 Claude Desktop 中使用 跨界AI 时的常见问题。配置步骤参考 [Claude Desktop 安装与配置](/claude-desktop/introduction)
+
+## 配置问题
+
+> **菜单里找不到 Developer**
+>
+> 需要先开启开发者模式：「Help → Troubleshooting → Enable Developer Mode」。开启后应用会重启，重启后才会出现「Developer」菜单
+
+> **配置窗口是只读的**
+>
+> 说明电脑上已经存在企业管理员下发的配置，个人无法修改，请联系你的 IT 管理员
+
+> **模型列表为空或缺少模型**
+>
+> 在配置窗口左上角「Search settings」中搜索 `models`，手动添加需要的模型名称，例如 `your-claude-model`，然后点击「Apply Changes」
+
+> **和 Claude Code 的配置有什么关系**
+>
+> 两者互不影响。Claude Desktop 的 API 设置不读取 `~/.claude/settings.json`，Claude Code 命令行工具需要按 [Claude Code 安装与配置](/claude-code/introduction) 单独配置
+
+## 错误排查
+
+> **提示 401 或认证失败**
+>
+> * 确认 API Key 已正确复制（无多余空格），且在有效期内
+> * 确认创建 API Key 时厂商选择的是「Anthropic」
+> * 确认「Gateway auth scheme」为 `bearer`
+> * 确认「Custom inference headers」中已添加 `User-Agent`，名称和值没有多余空格
+> * 确认请求地址为 `https://api.kuajieaigc.com`，没有加 `/v1`
+
+> **连接超时或无法访问**
+>
+> 打开「Developer → Configure Third-Party Inference…」，将「Gateway base URL」换成 [API 地址](/quickstart/cli-setup#请求地址) 中的其他地址，点击「Test connection」确认连通后，再点击「Apply Changes」
+
+## 其他问题
+
+> **[跨界AI官网](https://www.kuajieaigc.com)**
+>
+> 如果以上方法无法解决问题，请联系技术支持

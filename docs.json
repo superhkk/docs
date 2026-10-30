@@ -1,53 +1,100 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "跨界 AI 使用文档",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#2997FF",
+    "light": "#7C5CFF",
+    "dark": "#1D4ED8"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "navigation": {
-    "pages": [
+    "groups": [
       {
-        "group": "Getting Started",
+        "group": "开始使用",
         "pages": [
           "index",
-          "quickstart"
+          "quickstart/register",
+          "quickstart/recharge",
+          "quickstart/api-key",
+          "quickstart/cli-setup"
+        ]
+      },
+      {
+        "group": "API 与代码",
+        "pages": [
+          "api/overview"
+        ]
+      },
+      {
+        "group": "Codex",
+        "pages": [
+          "codex/introduction",
+          "codex/chatgpt-app",
+          "codex/vscode",
+          "codex/faq"
+        ]
+      },
+      {
+        "group": "Claude",
+        "pages": [
+          "claude-code/introduction",
+          "claude-code/faq",
+          "claude-desktop/introduction",
+          "claude-desktop/faq"
+        ]
+      },
+      {
+        "group": "Gemini",
+        "pages": [
+          "gemini/introduction",
+          "gemini/faq"
+        ]
+      },
+      {
+        "group": "客户端",
+        "pages": [
+          "clients/cherry-studio",
+          "clients/chatbox",
+          "clients/opencode",
+          "clients/openclaw",
+          "clients/jetbrains",
+          "cc-switch/usage",
+          "environment/setup"
+        ]
+      },
+      {
+        "group": "帮助",
+        "pages": [
+          "help/contact"
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png",
+    "href": "https://www.kuajieaigc.com"
   },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:support@mintlify.com"
+        "label": "官网",
+        "href": "https://www.kuajieaigc.com"
+      },
+      {
+        "label": "API 地址",
+        "href": "https://api.kuajieaigc.com"
+      },
+      {
+        "label": "模型价格",
+        "href": "https://www.kuajieaigc.com/pricing"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "进入控制台",
+      "href": "https://www.kuajieaigc.com/sign-in"
     }
   },
   "contextual": {
@@ -64,9 +111,24 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/superhkk/docs"
+    },
+    "links": [
+      {
+        "label": "备案信息",
+        "items": [
+          {
+            "label": "鲁ICP备2026059116号-1",
+            "href": "https://beian.miit.gov.cn/"
+          }
+        ]
+      }
+    ]
+  },
+  "seo": {
+    "metatags": {
+      "title": "跨界 AI 使用文档",
+      "description": "跨界 AI API、Codex、Claude Code、Gemini CLI 与客户端配置文档"
     }
   }
 }

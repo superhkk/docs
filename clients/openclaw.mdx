@@ -1,0 +1,92 @@
+---
+title: "OpenClaw 配置"
+description: "在 OpenClaw 中使用 跨界AI"
+---
+
+
+
+> 在 OpenClaw 中使用 跨界AI
+
+[OpenClaw](https://docs.openclaw.ai/zh-CN) 是一款开源的 AI 助手，主要为 macOS 和 Linux 设计，Windows 可以通过 WSL2 运行。按本页修改模型配置后，即可在 OpenClaw 中使用 跨界AI 的 GPT 模型
+
+## 环境要求
+
+* **Node.js**：22 或更高版本，参考 [环境配置](/environment/setup)
+* **操作系统**：macOS、Linux，或 Windows 的 WSL2
+
+## 安装
+
+按 [OpenClaw 官方安装文档](https://docs.openclaw.ai/zh-CN/install) 完成安装。安装过程中可以先跳过模型配置，装好后再按下文修改配置文件
+
+## 创建 API Key
+
+在控制台 [创建 API Key](/quickstart/api-key) 时，「厂商」选择「OpenAI」
+
+## 配置
+
+编辑 `~/.openclaw/openclaw.json`，用以下内容替换其中的 `models` 部分，并在 `agents.defaults` 中指定默认模型。将 `your-api-key-here` 替换为你的 API Key
+
+```json openclaw.json theme={null}
+{
+  "models": {
+    "providers": {
+      "kuajieai": {
+        "baseUrl": "https://api.kuajieaigc.com/v1",
+        "apiKey": "your-api-key-here",
+        "auth": "api-key",
+        "api": "openai-responses",
+        "models": [
+          {
+            "id": "your-model-id",
+            "name": "模型列表中的名称",
+            "reasoning": true,
+            "input": ["text", "image"],
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "kuajieai/your-model-id"
+      }
+    }
+  }
+}
+```
+
+> [!NOTE]
+>
+> `agents.defaults` 中原有的其他字段（如 `workspace`）保留不动，只修改 `model`
+
+保存后重启 OpenClaw，发送消息能正常回复即表示配置完成
+
+## 腾讯云 OpenClaw
+
+使用腾讯云提供的 OpenClaw 时，在自定义模型处粘贴以下配置
+
+```json theme={null}
+{
+  "provider": "kuajieai",
+  "base_url": "https://api.kuajieaigc.com/v1",
+  "api": "openai-responses",
+  "api_key": "your-api-key-here",
+  "model": {
+    "id": "your-model-id",
+    "name": "模型列表中的名称",
+    "reasoning": true,
+    "input": ["text", "image"],
+  }
+}
+```
+
+## 常见问题
+
+> **提示 401 或认证失败**
+>
+> 确认 `apiKey` 填写正确，`auth` 为 `api-key`，并且创建 API Key 时厂商选择的是「OpenAI」
+
+> **连接超时或无法访问**
+>
+> 确认 `baseUrl` 使用 `https://api.kuajieaigc.com/v1`

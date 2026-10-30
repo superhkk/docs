@@ -1,0 +1,122 @@
+---
+title: "CC-Switch 使用指南"
+description: "CC-Switch 配置工具使用指南"
+---
+
+
+
+> CC-Switch 配置工具使用指南
+
+## 什么是 CC-Switch
+
+CC-Switch 是一款跨平台桌面应用，统一管理 Codex、Claude Code 和 Gemini CLI 三大 AI 编程工具
+
+> [!WARNING]
+>
+> **使用前提**：CC-Switch 仅管理 CLI 工具的配置，不负责安装 CLI 本身。使用前请确保已安装对应的 CLI 工具：
+>
+> * [Codex 安装教程](/codex/introduction)
+> * [Claude Code 安装教程](/claude-code/introduction)
+> * [Gemini CLI 安装教程](/gemini/introduction)
+
+## 核心功能
+
+> **一键切换配置**
+>
+> 快速切换不同 API 供应商配置
+
+> **可视化管理**
+>
+> 图形界面管理所有配置，无需手动编辑文件
+
+> **MCP 服务器**
+>
+> 集成 MCP 服务器管理功能
+
+> **系统托盘**
+>
+> 常驻系统托盘，快捷操作
+
+> **本地代理**
+>
+> 支持本地代理配置
+
+> **故障转移**
+>
+> 自动检测并切换到可用配置
+
+## 软件下载
+
+**1. 访问下载页面**
+
+访问 [CC-Switch Release](https://github.com/farion1231/cc-switch/releases) 下载最新版本
+
+**2. 选择对应系统版本**
+
+* **Windows**：下载 `.msi` 安装包
+* **macOS**：下载 `.dmg` 安装包或使用 Homebrew 安装
+* **Linux**：下载 `.deb`、`.AppImage` 或使用 AUR 安装
+
+**3. 安装并启动**
+
+按照系统提示完成安装，启动 CC-Switch 应用
+
+## 配置步骤
+
+### 步骤一：选择 CLI 工具
+
+打开 CC-Switch，选择要配置的供应商，点击 + 按钮
+
+### 步骤二：添加配置
+
+**Codex**
+
+填写以下配置信息：
+
+* **供应商名称**：自定义名称，例如 `跨界AI`
+* **备注**：可选，用于标识用途，例如 `公司专用账号`
+* **官网链接**：`https://www.kuajieaigc.com`
+* **API Key**：从控制台生成的密钥（[如何生成](/quickstart/api-key)）
+* **API 请求地址**：`https://api.kuajieaigc.com/v1`
+* **模型名称**：从[模型广场](https://www.kuajieaigc.com/pricing)复制实际模型 ID
+
+**Claude Code**
+
+填写以下配置信息：
+
+* **供应商名称**：自定义名称，例如 `跨界AI`
+* **备注**：可选，用于标识用途，例如 `公司专用账号`
+* **官网链接**：`https://www.kuajieaigc.com`
+* **API Key**：从控制台生成的密钥（[如何生成](/quickstart/api-key)）
+* **请求地址**：`https://api.kuajieaigc.com`
+* **API 格式**：默认选择 `Anthropic Messages (原生)`
+
+**Gemini**
+
+填写以下配置信息：
+
+* **供应商名称**：自定义名称，例如 `跨界AI`
+* **备注**：可选，用于标识用途，例如 `公司专用账号`
+* **官网链接**：`https://www.kuajieaigc.com`
+* **API Key**：从控制台生成的密钥（[如何生成](/quickstart/api-key)）
+* **请求地址**：`https://api.kuajieaigc.com`
+* **模型**：从[模型广场](https://www.kuajieaigc.com/pricing)复制实际模型 ID
+
+### 步骤三：验证配置
+
+打开终端，运行以下命令测试：
+
+```bash theme={null}
+# Codex
+codex "hello"
+
+# Claude Code
+claude "hello"
+
+# Gemini CLI
+gemini "hello"
+```
+
+## 用量查询
+
+在[跨界AI控制台](https://www.kuajieaigc.com/wallet)查看账户余额和用量。客户端自定义用量查询依赖服务端提供的专用接口；请勿直接套用其他服务商的提取器配置。

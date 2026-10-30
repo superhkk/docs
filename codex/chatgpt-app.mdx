@@ -1,0 +1,111 @@
+---
+title: "ChatGPT 桌面应用安装与配置"
+description: "在 ChatGPT 桌面应用的 Codex 模式中使用 跨界AI"
+---
+
+
+
+> 在 ChatGPT 桌面应用的 Codex 模式中使用 跨界AI
+
+ChatGPT 桌面应用内置了 Codex（也常被称为 Codex App），可以在图形界面中让 Codex 读写项目文件、执行命令。它和 Codex 命令行工具共用同一份配置文件 `config.toml`，按本页配置后即可使用 跨界AI
+
+> [!NOTE]
+>
+> 如果你已经按 [Codex 安装与配置](/codex/introduction) 配置过 `config.toml`，登录后可以跳过「写入配置文件」，直接验证
+
+## 下载安装
+
+前往 [ChatGPT 下载页](https://chatgpt.com/download/) 下载对应系统的安装包，运行后按提示完成安装。支持 macOS 和 Windows
+
+## 创建 API Key
+
+在控制台 [创建 API Key](/quickstart/api-key) 时，「厂商」选择「OpenAI」
+
+## 使用 API Key 登录
+
+打开应用，在「欢迎使用 Codex」界面点击「输入 API 密钥」，填入你的 跨界AI API Key 后确认
+
+> [!WARNING]
+>
+> 不要点击「继续使用 ChatGPT 登录」，否则请求会发送到 OpenAI 官方，而不是 跨界AI
+
+## 写入配置文件
+
+**1. 打开设置**
+
+点击左下角「设置」，在弹出的菜单中再点击「设置」。菜单顶部显示「已通过 API 密钥登录」，说明上一步登录成功
+
+**2. 打开 config.toml**
+
+在左侧选择「配置」，点击右侧的「打开 config.toml」
+
+**3. 粘贴配置**
+
+把文件内容替换为以下配置并保存
+
+```toml config.toml theme={null}
+model_provider = "OpenAI"
+model = "your-model-id" # 从模型广场复制实际模型 ID
+model_reasoning_effort = "xhigh"
+disable_response_storage = true
+model_verbosity = "high"
+network_access = true
+
+[model_providers.OpenAI]
+name = "OpenAI"
+base_url = "https://api.kuajieaigc.com/v1"
+wire_api = "responses"
+requires_openai_auth = true
+```
+
+> [!WARNING]
+>
+> Codex 的请求地址**必须**以 `/v1` 结尾
+
+也可以直接用编辑器打开配置文件：macOS 为 `~/.codex/config.toml`，Windows 为 `C:\Users\你的用户名\.codex\config.toml`
+
+**4. 重启应用**
+
+完全退出应用（macOS 按 `Cmd+Q`）后重新打开，配置才会生效
+
+## 验证
+
+重新打开应用后，查看输入框下方，显示「自定义 (config.toml)」说明已经在使用你的配置
+
+发送以下消息，能正常回复 `ok` 即表示配置完成
+
+```text theme={null}
+Reply with exactly: ok
+```
+
+## 常见问题
+
+> **修改配置后没有生效**
+>
+> 应用只在启动时读取 `config.toml`。修改后需要完全退出应用（macOS 按 `Cmd+Q`），再重新打开
+
+> **输入框下方没有显示「自定义 (config.toml)」**
+>
+> * 确认已保存 `config.toml`，并且重启了应用
+> * 确认 `config.toml` 中有 `model_provider = "OpenAI"` 和 `[model_providers.OpenAI]` 两部分
+
+> **Chat 或 Work 模式无法使用**
+>
+> 使用 API Key 登录时，只有 Codex 会走 跨界AI。依赖 ChatGPT 账号和云端服务的功能（如 Chat、Work 模式和部分插件）不可用，属于正常现象
+
+> **和 Codex 命令行工具的配置有什么关系**
+>
+> 两者共用 `config.toml` 和登录信息，配置一次即可同时用于命令行和桌面应用
+
+> **提示 401 或认证失败**
+>
+> * 确认 API Key 已正确复制（无多余空格），且在有效期内
+> * 确认创建 API Key 时厂商选择的是「OpenAI」
+> * 确认 `config.toml` 中 `base_url` 为 `https://api.kuajieaigc.com/v1`
+> * 在左下角「设置」菜单中点击「退出登录」，再通过「输入 API 密钥」重新登录
+
+> **连接超时或无法访问**
+>
+> 确认 `config.toml` 中的 `base_url` 使用 `https://api.kuajieaigc.com/v1`，然后重启应用
+
+更多问题参考 [Codex 常见问题](/codex/faq)

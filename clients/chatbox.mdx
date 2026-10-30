@@ -1,0 +1,60 @@
+---
+title: "Chatbox 配置"
+description: "在 Chatbox 桌面端和手机端中使用 跨界AI"
+---
+
+
+
+> 在 Chatbox 桌面端和手机端中使用 跨界AI
+
+[Chatbox](https://chatboxai.app) 是一款跨平台的 AI 聊天客户端，支持 Windows、macOS、Linux、iOS 和 Android，适合在手机上使用 跨界AI
+
+## 下载安装
+
+前往 [Chatbox 官网](https://chatboxai.app) 下载桌面版，或在应用商店搜索「Chatbox」安装手机版
+
+## 创建 API Key
+
+在控制台 [创建 API Key](/quickstart/api-key)，「厂商」选择「OpenAI」
+
+> [!TIP]
+>
+> 建议给手机单独创建一个 API Key 并设置「额度限制」，手机丢失时直接删除这个 API Key 即可
+
+## 添加 跨界AI
+
+**1. 打开模型提供方**
+
+进入「设置」→「模型提供方」，在列表底部点击「添加」
+
+**2. 填写配置**
+
+| 字段 | 填写内容 |
+| - | - |
+| 名称 | `跨界AI` |
+| API 模式 | `OpenAI API 兼容` |
+| API 密钥 | 你的 API Key |
+| API 主机 | `https://api.kuajieaigc.com` |
+| API 路径 | `/v1/chat/completions` |
+
+**3. 添加模型**
+
+点击「获取」拉取模型列表，或点击「新建」手动填写模型 ID，如 `your-model-id`
+
+**4. 开始对话**
+
+新建对话，在输入框上方选择 跨界AI 下的模型，发送消息，能正常回复即表示配置完成
+
+## 常见问题
+
+> **提示 404**
+>
+> 检查「API 主机」与「API 路径」：主机只填 `https://api.kuajieaigc.com`，`/v1/chat/completions` 填在「API 路径」中，不要重复
+
+> **提示 401 或认证失败**
+>
+> 确认 API Key 已完整复制（无多余空格），厂商为「OpenAI」，并且在有效期内、余额充足
+
+> **连接超时或无法访问**
+>
+> 确认「API 主机」使用 `https://api.kuajieaigc.com`

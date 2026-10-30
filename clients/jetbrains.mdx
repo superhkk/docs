@@ -1,0 +1,38 @@
+---
+title: "JetBrains IDE 配置"
+description: "在 IDEA、PyCharm、GoLand 等 JetBrains IDE 中使用 Claude Code"
+---
+
+
+
+> 在 IDEA、PyCharm、GoLand 等 JetBrains IDE 中使用 Claude Code
+
+在 IntelliJ IDEA、PyCharm、GoLand 等 JetBrains IDE 中，可以通过插件以图形界面使用 Claude Code。插件直接调用本机的 Claude Code，所以需要先完成 Claude Code 的配置
+
+## 准备
+
+按 [Claude Code 安装与配置](/claude-code/introduction) 安装 Claude Code 并写入 跨界AI 配置，在终端运行 `claude` 能正常回复后再继续
+
+## 安装插件
+
+**1. 搜索插件**
+
+打开 IDE，进入「Settings」→「Plugins」→「Marketplace」，搜索「Claude Code GUI」并安装
+
+**2. 重启 IDE**
+
+安装完成后按提示重启 IDE
+
+**3. 开始使用**
+
+在侧边栏点击插件图标打开，发送消息能正常回复即表示配置完成
+
+## 常见问题
+
+> **插件提示找不到 Claude Code**
+>
+> 确认在终端中可以直接运行 `claude`。修改过环境变量后，需要完全退出 IDE 再重新打开
+
+> **提示 401 或认证失败**
+>
+> 插件使用的是 Claude Code 的配置，按 [Claude Code 常见问题](/claude-code/faq) 排查
