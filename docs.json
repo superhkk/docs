@@ -128,7 +128,8 @@
   "seo": {
     "metatags": {
       "title": "跨界 AI 使用文档",
-      "description": "跨界 AI API、Codex、Claude Code、Gemini CLI 与客户端配置文档"
+      "description": "跨界 AI API、Codex、Claude Code、Gemini CLI 与客户端配置文档",
+      "canonical": "https://docs.kuajieaigc.com"
     }
   }
 }
