@@ -1,6 +1,6 @@
 # 跨界 AI Mintlify 文档站设计
 
-**状态：** 等待审阅  
+**状态：** 用户已确认完整参照参考站
 **日期：** 2026-10-30
 
 ## 目标
@@ -9,15 +9,9 @@
 
 ## 范围
 
-首版采用“小步补齐”方式，沿用 `https://docs.rayinai.com/` 的用户路径与导航思路，但使用跨界 AI 自有品牌、入口和 API 地址，并以原创中文表述编写：
+完整对齐 `https://docs.rayinai.com/` 当前 24 个页面的导航主题和用户操作路径：介绍、注册、充值、API Key、通用 CLI、Codex、ChatGPT 桌面应用、VS Code、Claude Code、Claude Desktop、Gemini CLI、Cherry Studio、Chatbox、OpenCode、OpenClaw、JetBrains、CC-Switch、Node.js 环境、代码调用和联系支持。页面正文以跨界 AI 当前站点、账户流程和 API 配置重新编写，保持完整的主题覆盖，不逐段复制参考站原文。
 
-- 首页：说明服务用途，并提供注册、控制台和 API 接入入口。
-- 快速开始：说明从账号、API Key 到首个 API 请求的步骤；涉及账户后台的文案先核实实际页面后再写。
-- 客户端接入：提供通用 OpenAI 兼容配置，并优先补充 Codex、Claude Code、Gemini CLI 的必要配置。
-- API 调用：提供可复制的 `curl` 示例，使用 `https://api.kuajieaigc.com/v1`。
-- 常见问题与支持：回答 API 地址、Key、模型可用性等基础问题；通用 New API 功能链接到官方文档。
-
-暂不迁移完整 New API 功能手册，也不维护静态“最新模型”名单；模型可用情况以跨界 AI 控制台展示为准。
+涉及跨界 AI 后台实际按钮或账户策略的步骤需核实后再写。模型可用情况以跨界 AI 控制台展示为准；通用 New API 功能保留官方文档链接。
 
 ## 品牌与链接
 
@@ -35,7 +29,7 @@
 - Mintlify GitHub App 从 `main` 分支读取 `docs.json` 并自动发布；不会触发 New API 镜像构建或服务器 SSH 部署。
 - 在当前 Codex 客户端配置远程 MCP `mintlify-admin`，地址为 `https://mcp.mintlify.com`；首次使用需完成 Mintlify 账号授权。
 - Mintlify 控制台绑定 `docs.kuajieaigc.com`。若尚未配置 DNS，按控制台给出的 CNAME 目标添加记录后等待 TLS 生效。
-- 当前仓库的 `index.mdx`、`quickstart.mdx`、`docs.json`、Logo 和 README 将从 starter 内容替换为项目内容；`AGENTS.md` 更新为本项目术语和文档规则。
+- 当前仓库的 `index.mdx`、`quickstart.mdx`、`docs.json`、Logo、README 和全部 24 个用户文档页面将从 starter 内容替换为项目内容；`AGENTS.md` 更新为本项目术语和文档规则。
 
 ## 验收
 
