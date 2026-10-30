@@ -72,8 +72,8 @@
     ]
   },
   "logo": {
-    "light": "/logo/wordmark-light.svg",
-    "dark": "/logo/wordmark-dark.svg",
+    "light": "/logo/wordmark-light.png",
+    "dark": "/logo/wordmark-dark.png",
     "href": "https://www.kuajieaigc.com"
   },
   "navbar": {
