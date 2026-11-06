@@ -4,7 +4,7 @@
 
 ## 站点信息
 
-- 品牌名称：跨界AI
+- 品牌名称：跨界 AI
 - 品牌标语：大国重器·AI让生活更美好
 - 官网与控制台：`https://www.kuajieaigc.com`
 - 模型价格与当前模型 ID：`https://www.kuajieaigc.com/pricing`

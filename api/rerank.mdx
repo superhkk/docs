@@ -1,0 +1,21 @@
+---
+title: "Rerank API"
+description: "使用 POST /v1/rerank 对候选文档按查询相关性重新排序，能力取决于已开放的模型。"
+sidebarTitle: "Rerank"
+---
+
+Rerank 接口用于将查询与候选文档发送给支持重排序的模型。调用前确认模型广场中存在可用的重排序模型，并按渠道要求构造请求体。
+
+## 请求地址
+
+`POST https://api.kuajieaigc.com/v1/rerank`
+
+```json
+{
+  "model": "your-rerank-model-id",
+  "query": "用户希望检索的主题",
+  "documents": ["候选文档一", "候选文档二"]
+}
+```
+
+字段细节和返回结构与兼容的上游协议有关。若模型列表未标明重排序用途，请先向客服确认，避免将聊天模型用于此端点。

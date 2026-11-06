@@ -1,0 +1,15 @@
+---
+title: "Gemini 兼容接口"
+description: "使用 Gemini 原生路径 /v1beta/models/{model}:{action} 调用跨界 AI 上支持的模型。"
+sidebarTitle: "Gemini"
+---
+
+跨界 AI 代理 Gemini 格式的模型请求。Gemini 客户端通常只填写 `https://api.kuajieaigc.com`，随后由客户端追加 `/v1beta` 路径。
+
+## 请求路径
+
+`POST https://api.kuajieaigc.com/v1beta/models/{model}:generateContent`
+
+模型名称需替换为该协议可用的模型 ID。请求认证头和模型列表格式以客户端及模型渠道支持情况为准。
+
+部分 Gemini 客户端会使用 `streamGenerateContent` 并携带 `alt=sse`。只有目标模型和渠道支持流式请求时才可使用。不要将 OpenAI 风格 Base URL 中的 `/v1` 直接复制到 Gemini 配置。相关设置见 [Gemini CLI](/gemini/introduction)。

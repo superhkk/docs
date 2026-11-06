@@ -1,0 +1,20 @@
+---
+title: "Embeddings API"
+description: "通过 /v1/embeddings 或兼容路径生成文本向量，先确认目标模型支持嵌入任务。"
+sidebarTitle: "Embeddings"
+---
+
+跨界 AI 提供 Embeddings 兼容路由。嵌入模型通常与聊天模型不同，请从模型广场查找可用的嵌入模型 ID，并确认账户分组权限。
+
+## OpenAI 兼容路径
+
+`POST https://api.kuajieaigc.com/v1/embeddings`
+
+```json
+{
+  "model": "your-embedding-model-id",
+  "input": "待转换为向量的文本"
+}
+```
+
+请求字段、向量维度和批量限制取决于模型渠道；本文不固定承诺某个维度或最大输入长度。Gemini 兼容请求可使用 `/v1/engines/{model}/embeddings`，按 Gemini 客户端要求构造请求体。

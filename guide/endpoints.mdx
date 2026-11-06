@@ -1,0 +1,32 @@
+---
+title: "接入地址速查"
+description: "按客户端协议选择跨界 AI API 的 Base URL，区分 OpenAI、Anthropic Claude 与 Gemini 的请求路径。"
+sidebarTitle: "地址速查"
+---
+
+跨界 AI 使用统一 API 域名，不同客户端会自行拼接不同协议路径。先确认软件要求填写的是 Base URL、主机还是完整接口地址，再使用下表，避免重复拼接路径。
+
+| 场景 | 填写地址 |
+| --- | --- |
+| OpenAI SDK、OpenAI 兼容客户端、Codex | `https://api.kuajieaigc.com/v1` |
+| Chat Completions 完整请求 | `https://api.kuajieaigc.com/v1/chat/completions` |
+| Claude Code / Anthropic 兼容客户端 | `https://api.kuajieaigc.com` |
+| Gemini CLI | `https://api.kuajieaigc.com` |
+
+> [!WARNING]
+> 如果字段标注为 Base URL，就不要填完整接口路径。模型 ID 请从[模型广场](https://www.kuajieaigc.com/pricing)复制；不同协议可用性以模型详情和控制台为准。
+
+## OpenAI 兼容请求
+
+```bash
+curl https://api.kuajieaigc.com/v1/chat/completions \
+  -H 'Authorization: Bearer your-api-key-here' \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"your-model-id","messages":[{"role":"user","content":"你好"}]}'
+```
+
+## 下一步
+
+- [Chat Completions](/api/chat-completions)
+- [配置客户端](/quickstart/cli-setup)
+- [查看可用模型](/user/models)

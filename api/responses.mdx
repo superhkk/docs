@@ -1,0 +1,26 @@
+---
+title: "Responses API"
+description: "通过 POST /v1/responses 使用 OpenAI Responses 格式发送请求，兼容能力取决于模型和渠道。"
+sidebarTitle: "Responses"
+---
+
+跨界 AI 暴露 OpenAI Responses 兼容路由。请使用模型广场中的模型 ID 和 API Key；具体请求字段是否被目标模型支持，以其渠道和响应结果为准。
+
+## 请求地址
+
+`POST https://api.kuajieaigc.com/v1/responses`
+
+```bash
+curl https://api.kuajieaigc.com/v1/responses \
+  -H 'Authorization: Bearer your-api-key-here' \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"your-model-id","input":"用一句话介绍向量数据库"}'
+```
+
+Responses 格式可用于支持该协议的工具和模型。不要假定 Chat Completions 字段在此接口上完全等价；遇到不兼容字段时，先用最小请求验证。
+
+## 相关页面
+
+- [API 概览](/api/overview)
+- [Chat Completions](/api/chat-completions)
+- [Codex 配置](/codex/introduction)

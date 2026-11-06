@@ -1,0 +1,21 @@
+---
+title: "Anthropic Messages API"
+description: "通过 POST /v1/messages 使用 Anthropic Messages 格式调用支持该协议的模型。"
+sidebarTitle: "Messages"
+---
+
+跨界 AI 提供 Anthropic Messages 兼容路由。客户端需使用 Anthropic 协议格式和适配的认证方式，模型可用性按模型广场和账户分组为准。
+
+## 请求地址
+
+`POST https://api.kuajieaigc.com/v1/messages`
+
+Claude Code 等客户端的 Base URL 通常填写 `https://api.kuajieaigc.com`，由客户端附加 `/v1/messages`。
+
+## 配置要点
+
+- 使用可用于 Anthropic 兼容调用的 API Key。
+- 按客户端设置填写模型 ID 和必填项。
+- 工具调用、视觉输入和流式输出依赖所用模型及渠道。
+
+先使用目标客户端的最小请求验证连通性，再逐步启用工具和多模态参数。查看 [Claude Code 配置](/claude-code/introduction)。

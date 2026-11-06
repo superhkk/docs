@@ -1,0 +1,21 @@
+---
+title: "Completions API"
+description: "通过 POST /v1/completions 调用传统文本补全接口，适用于支持该格式的模型。"
+sidebarTitle: "Completions"
+---
+
+跨界 AI 暴露 OpenAI Completions 兼容路径。传统补全接口使用提示文本，而 Chat Completions 使用消息数组。
+
+## 请求地址
+
+`POST https://api.kuajieaigc.com/v1/completions`
+
+```json
+{
+  "model": "your-model-id",
+  "prompt": "请用一句话介绍跨界 AI。",
+  "max_tokens": 128
+}
+```
+
+模型和渠道需要支持补全格式。若你使用的是聊天模型，请改用 [Chat Completions](/api/chat-completions)。模型 ID、可用状态和价格以[模型广场](https://www.kuajieaigc.com/pricing)为准。

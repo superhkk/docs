@@ -1,0 +1,20 @@
+---
+title: "Moderations API"
+description: "通过 POST /v1/moderations 使用 OpenAI 兼容格式检查文本内容，模型与策略以当前渠道为准。"
+sidebarTitle: "Moderations"
+---
+
+跨界 AI 暴露 Moderations 兼容路由。是否可用取决于账户模型权限以及已配置的上游渠道。
+
+## 请求地址
+
+`POST https://api.kuajieaigc.com/v1/moderations`
+
+```json
+{
+  "model": "your-moderation-model-id",
+  "input": "需要检查的文本"
+}
+```
+
+此接口返回不构成法律、医疗或其他专业审核结论。调用前请确认目标模型支持内容审核协议，具体输出字段参考模型渠道的响应。

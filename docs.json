@@ -11,9 +11,25 @@
   "navigation": {
     "groups": [
       {
-        "group": "开始使用",
+        "group": "跨界 AI 文档",
         "pages": [
           "index",
+          "guide/endpoints",
+          "user/models",
+          "user/auth",
+          "user/dashboard",
+          "user/token",
+          "user/wallet",
+          "user/log",
+          "user/profile",
+          "user/pricing",
+          "user/playground",
+          "user/chat-apps"
+        ]
+      },
+      {
+        "group": "快速开始",
+        "pages": [
           "quickstart/register",
           "quickstart/recharge",
           "quickstart/api-key",
@@ -21,53 +37,80 @@
         ]
       },
       {
-        "group": "API 与代码",
+        "group": "API 使用指南",
         "pages": [
           "api/overview",
-          "api/chat-completions"
+          "api/models/list",
+          "api/chat-completions",
+          "api/responses",
+          "api/messages",
+          "api/gemini",
+          "api/completions",
+          "api/embeddings",
+          "api/rerank",
+          "api/moderations",
+          "api/images",
+          "api/audio",
+          "api/realtime",
+          "api/videos"
         ]
       },
       {
-        "group": "Codex",
+        "group": "API 接口目录",
+        "openapi": "openapi/relay.json"
+      },
+      {
+        "group": "管理 API",
         "pages": [
+          "manage/overview"
+        ]
+      },
+      {
+        "group": "开发工具",
+        "pages": [
+          "cc-switch/usage",
+          "claude-code/introduction",
+          "claude-code/faq",
           "codex/introduction",
           "codex/chatgpt-app",
           "codex/vscode",
-          "codex/faq"
-        ]
-      },
-      {
-        "group": "Claude",
-        "pages": [
-          "claude-code/introduction",
-          "claude-code/faq",
-          "claude-desktop/introduction",
-          "claude-desktop/faq"
-        ]
-      },
-      {
-        "group": "Gemini",
-        "pages": [
+          "codex/faq",
           "gemini/introduction",
-          "gemini/faq"
+          "gemini/faq",
+          "clients/deepseek-harness",
+          "clients/factory-droid-cli"
         ]
       },
       {
-        "group": "客户端",
+        "group": "应用接入",
         "pages": [
           "clients/cherry-studio",
           "clients/chatbox",
-          "clients/opencode",
+          "clients/deepchat",
+          "clients/aionui",
+          "clients/aqbot",
           "clients/openclaw",
+          "clients/langbot",
+          "clients/astrbot",
+          "clients/memoh",
+          "clients/fluentread",
+          "clients/luna-translator",
+          "clients/opencode",
           "clients/jetbrains",
-          "cc-switch/usage",
+          "claude-desktop/introduction",
+          "claude-desktop/faq",
           "environment/setup"
         ]
       },
       {
-        "group": "帮助",
+        "group": "帮助与政策",
         "pages": [
-          "help/contact"
+          "faq",
+          "help/contact",
+          "legal/terms",
+          "legal/privacy",
+          "legal/refund",
+          "legal/usage"
         ]
       }
     ]

@@ -1,0 +1,12 @@
+---
+title: "Realtime API"
+description: "通过 WebSocket 路由建立实时会话，需确认模型与分组已开放实时能力。"
+sidebarTitle: "Realtime"
+---
+
+Realtime 使用 WebSocket，而不是普通的 JSON POST 请求。跨界 AI 路由为 `wss://api.kuajieaigc.com/v1/realtime`。
+
+请求会话需要在客户端按兼容协议提供模型和授权信息。模型 ID 必须支持实时语音或实时交互；普通聊天模型不能据此推断支持 Realtime。
+
+> [!NOTE]
+> WebSocket 握手、认证头和事件结构与所用 SDK 的实现有关。请使用客户端对应版本的 Realtime 文档，并先用最小会话验证模型权限。

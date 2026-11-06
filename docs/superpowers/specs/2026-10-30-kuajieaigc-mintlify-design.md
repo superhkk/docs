@@ -1,6 +1,6 @@
 # 跨界 AI Mintlify 文档站设计
 
-**状态：** 用户已确认完整参照参考站
+**状态：** 用户已确认完整参照参考文档站
 **日期：** 2026-10-30
 
 ## 目标
@@ -9,7 +9,7 @@
 
 ## 范围
 
-完整对齐 `https://docs.rayinai.com/` 当前 24 个页面的导航主题和用户操作路径：介绍、注册、充值、API Key、通用 CLI、Codex、ChatGPT 桌面应用、VS Code、Claude Code、Claude Desktop、Gemini CLI、Cherry Studio、Chatbox、OpenCode、OpenClaw、JetBrains、CC-Switch、Node.js 环境、代码调用和联系支持。页面正文以跨界 AI 当前站点、账户流程和 API 配置重新编写，保持完整的主题覆盖，不逐段复制参考站原文。
+完整对齐 `外部文档参考文档站` 当前 24 个页面的导航主题和用户操作路径：介绍、注册、充值、API Key、通用 CLI、Codex、ChatGPT 桌面应用、VS Code、Claude Code、Claude Desktop、Gemini CLI、Cherry Studio、Chatbox、OpenCode、OpenClaw、JetBrains、CC-Switch、Node.js 环境、代码调用和联系支持。页面正文以跨界 AI 当前站点、账户流程和 API 配置重新编写，保持完整的主题覆盖，不逐段复制参考文档站原文。
 
 涉及跨界 AI 后台实际按钮或账户策略的步骤需核实后再写。模型可用情况以跨界 AI 控制台展示为准；通用 New API 功能保留官方文档链接。
 

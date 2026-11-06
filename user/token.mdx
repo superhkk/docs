@@ -1,0 +1,27 @@
+---
+title: "管理 API 密钥"
+description: "在控制台创建、查看或撤销 API Key，并将密钥安全地配置到跨界 AI 客户端。"
+sidebarTitle: "API 密钥"
+---
+
+API Key 是调用跨界 AI API 的凭证。每个密钥可在控制台按页面提供的选项配置名称、可用分组、额度或其他限制；可配置字段以当前页面为准。
+
+## 创建密钥
+
+<Steps>
+  <Step title="打开 API 密钥页面">登录后访问[API 密钥](https://www.kuajieaigc.com/keys)。</Step>
+  <Step title="设置密钥">选择创建密钥，填写名称并选择账户可用的分组及其他设置。</Step>
+  <Step title="安全保存">确认创建后，将密钥保存在客户端的安全配置或环境变量中。</Step>
+</Steps>
+
+## 请求中使用
+
+OpenAI 兼容接口使用 Bearer 认证：
+
+    Authorization: Bearer your-api-key-here
+
+不要把真实密钥提交到 Git、发到公开聊天中，或写入浏览器端代码。密钥泄露后请在控制台撤销并重新创建。
+
+## 认证失败
+
+检查密钥是否复制完整、是否已撤销、请求头是否正确，以及该密钥的分组是否允许访问所请求的模型。

@@ -1,0 +1,15 @@
+---
+title: "音频接口"
+description: "通过音频转录、翻译或语音生成路径处理音频任务，模型支持范围以控制台为准。"
+sidebarTitle: "音频"
+---
+
+跨界 AI 提供 OpenAI 兼容音频路由。调用前先确认可用模型、文件格式、大小限制与计费方式；这些条件可能由上游渠道决定。
+
+## 支持的路径
+
+- `POST /v1/audio/transcriptions`：音频转文本。
+- `POST /v1/audio/translations`：音频翻译。
+- `POST /v1/audio/speech`：文本生成语音。
+
+完整请求地址的主机为 `https://api.kuajieaigc.com`。音频端点通常使用 multipart 或 JSON，按对应客户端和目标模型的协议填写。不要在未确认模型能力时假设语言、格式或流式能力。

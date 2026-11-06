@@ -1,0 +1,21 @@
+---
+title: "使用 API 与在线测试"
+description: "通过控制台测试入口或 OpenAI 兼容请求验证跨界 AI 的端点、授权和模型 ID。"
+sidebarTitle: "在线测试"
+---
+
+在控制台可用的在线测试入口中验证模型调用，或使用 curl 和 SDK 从本地发起请求。在线测试所提供的模型和参数以当前页面为准。
+
+## 用 curl 测试
+
+```bash
+curl https://api.kuajieaigc.com/v1/chat/completions \
+  -H 'Authorization: Bearer your-api-key-here' \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"your-model-id","messages":[{"role":"user","content":"请简短回复：连接成功"}]}'
+```
+
+成功返回表示域名、密钥和模型 ID 已通过这次请求验证。若失败，先检查[接入地址](/guide/endpoints)、密钥分组和模型状态。
+
+> [!WARNING]
+> 示例中的密钥和模型 ID 是占位符，不能直接作为真实凭证使用。

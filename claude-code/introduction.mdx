@@ -3,11 +3,7 @@ title: "Claude Code 安装与配置"
 description: "Claude Code 安装与配置教程"
 ---
 
-
-
-> Claude Code 安装与配置教程
-
-本页介绍如何安装 Claude Code，并将其配置为使用 跨界AI 服务
+本页介绍如何安装 Claude Code，并将其配置为使用跨界 AI 服务
 
 ## 环境准备
 
@@ -119,7 +115,7 @@ claude --version
 | 配置项 | 说明 |
 | - | - |
 | `ANTHROPIC_AUTH_TOKEN` | 你的 API Key |
-| `ANTHROPIC_BASE_URL` | 跨界AI 请求地址 |
+| `ANTHROPIC_BASE_URL` | 跨界 AI 请求地址 |
 | `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | 关闭遥测、错误上报等非必要请求，减少国内网络下的连接报错。同时会关闭自动更新，需要定期手动运行 `claude update` |
 
 > [!NOTE]
@@ -130,48 +126,66 @@ claude --version
 
 在 CC Switch 左侧选择 Claude Code，点击“添加供应商”，并选择自定义配置。
 
-<Frame caption="选择 Claude Code 并开始添加供应商。">
-  <img src="/images/clients/cc-switch/claude-code-01-add.png" alt="选择 Claude Code 并点击添加供应商" />
+选择 Claude Code 并开始添加供应商。
+
+<Frame>
+<img src="/images/clients/cc-switch/claude-code-01-add.png" alt="选择 Claude Code 并点击添加供应商" />
 </Frame>
 
-<Frame caption="在供应商模板中选择自定义配置。">
-  <img src="/images/clients/cc-switch/claude-code-02-custom.png" alt="为 Claude Code 选择自定义配置" />
+在供应商模板中选择自定义配置。
+
+<Frame>
+<img src="/images/clients/cc-switch/claude-code-02-custom.png" alt="为 Claude Code 选择自定义配置" />
 </Frame>
 
 按本页配置填写供应商名称、官网和 API Key。Claude Code 的请求地址填写 `https://api.kuajieaigc.com`，不要在地址后添加 `/v1`。
 
-<Frame caption="填写跨界 AI 的官网、API Key 和请求地址。">
-  <img src="/images/clients/cc-switch/claude-code-03-form.png" alt="填写 Claude Code 供应商基本信息和请求地址" />
+填写跨界 AI 的官网、API Key 和请求地址。
+
+<Frame>
+<img src="/images/clients/cc-switch/claude-code-03-form.png" alt="填写 Claude Code 供应商基本信息和请求地址" />
 </Frame>
 
-<Frame caption="按需设置端点并测试连接。">
-  <img src="/images/clients/cc-switch/claude-code-04-endpoints.png" alt="为 Claude Code 添加端点并测速" />
+按需设置端点并测试连接。
+
+<Frame>
+<img src="/images/clients/cc-switch/claude-code-04-endpoints.png" alt="为 Claude Code 添加端点并测速" />
 </Frame>
 
 高级选项可先保持默认。检查自动生成的配置 JSON 后添加供应商。
 
-<Frame caption="检查 Claude Code 高级选项。">
-  <img src="/images/clients/cc-switch/claude-code-05-advanced.png" alt="检查 Claude Code 高级选项" />
+检查 Claude Code 高级选项。
+
+<Frame>
+<img src="/images/clients/cc-switch/claude-code-05-advanced.png" alt="检查 Claude Code 高级选项" />
 </Frame>
 
-<Frame caption="检查 Claude Code 自动生成的配置 JSON。">
-  <img src="/images/clients/cc-switch/claude-code-06-json.png" alt="检查 Claude Code 自动生成的配置 JSON" />
+检查 Claude Code 自动生成的配置 JSON。
+
+<Frame>
+<img src="/images/clients/cc-switch/claude-code-06-json.png" alt="检查 Claude Code 自动生成的配置 JSON" />
 </Frame>
 
 添加后点击启用，切换到跨界 AI 供应商。
 
-<Frame caption="在 CC Switch 中启用 Claude Code 供应商。">
-  <img src="/images/clients/cc-switch/claude-code-07-enable.png" alt="在 CC Switch 中启用 Claude Code 供应商" />
+在 CC Switch 中启用 Claude Code 供应商。
+
+<Frame>
+<img src="/images/clients/cc-switch/claude-code-07-enable.png" alt="在 CC Switch 中启用 Claude Code 供应商" />
 </Frame>
 
-<Frame caption="确认当前供应商已启用。">
-  <img src="/images/clients/cc-switch/claude-code-08-active.png" alt="CC Switch 显示 Claude Code 供应商正在使用" />
+确认当前供应商已启用。
+
+<Frame>
+<img src="/images/clients/cc-switch/claude-code-08-active.png" alt="CC Switch 显示 Claude Code 供应商正在使用" />
 </Frame>
 
 需要调用国产模型时，可按需设置模型映射；使用模型广场中的本站模型 ID。
 
-<Frame caption="在 Claude Code 模型映射中配置模型 ID。">
-  <img src="/images/clients/cc-switch/claude-code-09-cn-models.png" alt="在 Claude Code 的模型映射中配置国产模型" />
+在 Claude Code 模型映射中配置模型 ID。
+
+<Frame>
+<img src="/images/clients/cc-switch/claude-code-09-cn-models.png" alt="在 Claude Code 的模型映射中配置国产模型" />
 </Frame>
 
 ## 验证

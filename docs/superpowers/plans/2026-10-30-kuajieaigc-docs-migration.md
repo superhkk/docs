@@ -2,9 +2,9 @@
 
 > **For agentic workers:** Execute inline in this session; do not dispatch subagents. Work through each task and verify the listed result before continuing.
 
-**Goal:** Replace the Mintlify starter site in `superhkk/docs` with a Chinese documentation site covering all 24 topics on `docs.rayinai.com`, branded for Kuajie AI.
+**Goal:** Replace the Mintlify starter site in `superhkk/docs` with a Chinese documentation site covering all 24 topics on `外部文档参考文档站`, branded for Kuajie AI.
 
-**Architecture:** Keep the standalone public `superhkk/docs` repository and Mintlify `docs.json` as the site source of truth. Recreate the reference site's user journey and topic coverage with original Kuajie AI wording, current product links, and the configured Kuajie AI logo.
+**Architecture:** Keep the standalone public `superhkk/docs` repository and Mintlify `docs.json` as the site source of truth. Recreate the reference documentation site's user journey and topic coverage with original Kuajie AI wording, current product links, and the configured Kuajie AI logo.
 
 **Tech Stack:** Mintlify, `docs.json`, MDX/Markdown, GitHub `main` auto-deploy, Codex remote MCP.
 
@@ -13,9 +13,9 @@
 - Public homepage: `https://www.kuajieaigc.com`.
 - API base URL in examples: `https://api.kuajieaigc.com/v1`.
 - Docs domain: `https://docs.kuajieaigc.com`.
-- Brand name and slogan: `跨界AI` and `大国重器·AI让生活更美好`.
-- Keep the full 24-topic page set represented in the reference site's `llms.txt`.
-- Reword source material for Kuajie AI; do not include RayinAPI branding, URLs, keys, or placeholder tokens.
+- Brand name and slogan: `跨界 AI` and `大国重器·AI让生活更美好`.
+- Keep the full 24-topic page set represented in the reference documentation site's `llms.txt`.
+- Reword source material for Kuajie AI; do not include 第三方服务 branding, URLs, keys, or placeholder tokens.
 - Use current console behavior for account steps; do not guess unknown account controls or static latest model names.
 - Do not place server SSH, database, Redis, or deployment secrets in this public documentation repository.
 
@@ -32,7 +32,7 @@
 - Add: `assets/relay-station-kj-logo.png`
 
 - [ ] Set Mintlify name, colors, logo, favicon, navigation groups, homepage links, support link, and GitHub anchor to Kuajie AI.
-- [ ] Mirror the reference site's groups for quick start, developer clients, API, environment, CC-Switch, and help; include all 24 target routes.
+- [ ] Mirror the reference documentation site's groups for quick start, developer clients, API, environment, CC-Switch, and help; include all 24 target routes.
 - [ ] Replace starter homepage and README with Chinese Kuajie AI copy and add project-specific terminology/style guidance to `AGENTS.md`.
 - [ ] Verify every page listed in `docs.json` has a corresponding Markdown/MDX file and the logo asset is present.
 
@@ -70,7 +70,7 @@
 - Add: `api/overview.mdx`
 - Add: `help/contact.mdx`
 
-- [ ] Cover the five additional clients, CC-Switch, Node.js environment setup, HTTP/SDK usage, and support/contact route from the reference site.
+- [ ] Cover the five additional clients, CC-Switch, Node.js environment setup, HTTP/SDK usage, and support/contact route from the reference documentation site.
 - [ ] Provide OpenAI-compatible request examples with the Kuajie AI API base URL and a clearly marked environment-variable placeholder for user-owned API keys.
 - [ ] Link generic New API feature explanations to the official New API documentation.
 

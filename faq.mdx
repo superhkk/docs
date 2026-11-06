@@ -1,0 +1,23 @@
+---
+title: "常见问题"
+description: "排查跨界 AI 的模型不可用、认证失败、地址填写错误、余额和调用日志问题。"
+sidebarTitle: "常见问题"
+---
+
+本页汇总账户、API Key、模型选择和客户端接入中的常见排查步骤。排查时请优先使用控制台当前模型、价格和账户信息。
+
+## 请求返回认证错误
+
+检查 API Key 是否有效、认证头是否为 `Authorization: Bearer ...`，并确认密钥未被撤销。
+
+## 找不到模型或无权限
+
+从模型广场复制模型 ID，检查 API Key 的分组和模型可用状态。客户端模型名称不一定等于供应商上游名称。
+
+## 连接地址错误
+
+OpenAI 兼容 Base URL 通常为 `https://api.kuajieaigc.com/v1`；Claude 和 Gemini 客户端通常填写主机 `https://api.kuajieaigc.com`。详见[接入地址速查](/guide/endpoints)。
+
+## 如何联系支持
+
+通过官网当前展示的客服入口联系，并提供客户端、请求时间、模型 ID 和错误信息。不要发送完整 API Key。
