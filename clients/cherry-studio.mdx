@@ -29,7 +29,8 @@ description: "在 Cherry Studio 桌面客户端中使用 跨界AI"
 
 | 提供商类型 | 适用模型 |
 | - | - |
-| `OpenAI-Responses` | GPT 系列（推荐） |
+| `OpenAI` / OpenAI 兼容 | 国产模型、GPT 和 Chat Completions 模型 |
+| `OpenAI-Responses` | 使用 Responses 接口的模型和客户端 |
 | `Anthropic` | Claude 系列 |
 
 > [!TIP]
@@ -41,13 +42,18 @@ description: "在 Cherry Studio 桌面客户端中使用 跨界AI"
 | 字段 | 填写内容 |
 | - | - |
 | API 密钥 | 你的 API Key |
-| API 地址 | `https://api.kuajieaigc.com` |
+| OpenAI 兼容 API 地址 | `https://api.kuajieaigc.com/v1` |
 
-Cherry Studio 会自动补全 `/v1/...` 路径，输入框下方会显示完整的请求地址预览
+选择 OpenAI 兼容提供商时，地址填 `https://api.kuajieaigc.com/v1`。如果当前版本把“API 主机”和“API 路径”分开，主机填 `https://api.kuajieaigc.com`，路径填 `/v1/chat/completions`。
+
+<Frame caption="Cherry Studio 服务商设置界面示意。图中为第三方文档示例地址，请按上表填写跨界 AI 的地址。">
+  <img src="/images/clients/cherry-studio-provider-settings.webp" alt="Cherry Studio 的 API 密钥、API 地址和模型列表设置" />
+</Frame>
+
 
 > [!WARNING]
 >
-> API 地址不要以 `/` 结尾，也不要手动加 `/v1`，否则请求路径会出错
+> 不要同时在 Base URL 和 API 路径中重复填写 `/v1`。以设置页面显示的完整请求地址为准。
 
 **4. 添加模型**
 
@@ -65,8 +71,8 @@ Cherry Studio 会自动补全 `/v1/...` 路径，输入框下方会显示完整�
 
 > **检测失败或提示 404**
 >
-> * 确认 API 地址为 `https://api.kuajieaigc.com`，没有多余的 `/v1` 或末尾的 `/`
-> * 确认提供商类型与 API Key 的厂商一致：GPT 用 `OpenAI-Responses`，Claude 用 `Anthropic`
+> * OpenAI 兼容提供商使用 `https://api.kuajieaigc.com/v1`，或按分开的字段填写主机和 `/v1/chat/completions`
+> * 确认提供商类型与 API Key 的厂商一致：国产模型使用 OpenAI 兼容入口，Claude 使用 `Anthropic`
 
 > **提示 401 或认证失败**
 >
@@ -78,4 +84,4 @@ Cherry Studio 会自动补全 `/v1/...` 路径，输入框下方会显示完整�
 
 > **连接超时或无法访问**
 >
-> 确认 API 地址使用 `https://api.kuajieaigc.com`，同样不加 `/v1`
+> 确认域名为 `api.kuajieaigc.com`，并检查当前字段是否要求 `/v1`。

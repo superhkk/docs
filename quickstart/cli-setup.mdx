@@ -47,16 +47,16 @@ description: "为 Codex、Claude Code、Gemini CLI 配置 跨界AI"
 
 各工具的请求地址不同，配置时注意区分。具体可用模型和模型 ID 请以[模型广场](https://www.kuajieaigc.com/pricing)当前展示为准。
 
-| 工具 | 请求地址 |
+| 工具或协议 | Base URL / 请求地址 |
 | - | - |
-| Codex / ChatGPT 桌面应用 / VS Code 插件 | `https://api.kuajieaigc.com/v1` |
-| Claude Code | `https://api.kuajieaigc.com` |
-| Claude Desktop | `https://api.kuajieaigc.com` |
+| OpenAI 兼容客户端、国产模型、Codex、ChatGPT 桌面应用、VS Code 插件 | `https://api.kuajieaigc.com/v1` |
+| Chat Completions 完整接口 | `https://api.kuajieaigc.com/v1/chat/completions` |
+| Claude Code、Claude Desktop | `https://api.kuajieaigc.com` |
 | Gemini CLI | `https://api.kuajieaigc.com` |
 
 ## 请求地址
 
-当前统一使用 `https://api.kuajieaigc.com`。不同工具的路径规则请以本页配置示例为准。
+当前 API 主域名统一为 `https://api.kuajieaigc.com`。OpenAI 兼容客户端的 Base URL 通常需要包含 `/v1`，Claude 和 Gemini 客户端通常只填写主域名，由客户端补齐协议路径。完整接口地址请按客户端字段说明填写。
 
 ## 遇到问题
 

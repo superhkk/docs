@@ -1,22 +1,39 @@
 ---
-title: "在代码中调用"
-description: "通过 HTTP 请求或官方 SDK 在自己的代码中调用 跨界AI"
+title: "API 与代码调用"
+description: "了解跨界 AI 的统一 API 地址、协议选择和 SDK 配置，快速调用国产模型及其他兼容模型。"
 ---
 
 
 
-> 通过 HTTP 请求或官方 SDK 在自己的代码中调用 跨界AI
+跨界 AI 提供统一的 API 地址。国产模型优先使用 OpenAI 兼容的 Chat Completions，Codex 等客户端可以使用 Responses，Claude Code 使用 Anthropic Messages，Gemini CLI 使用 Gemini 兼容路径。
 
-除了在工具中使用，你也可以在自己的程序里直接调用 跨界AI。接口与官方格式兼容，只需替换请求地址和 API Key
+除了在工具中使用，你也可以在自己的程序里直接调用跨界 AI。先创建 [API Key](/quickstart/api-key)，再根据客户端字段类型选择正确的 Base URL。模型 ID 请从[模型广场](https://www.kuajieaigc.com/pricing)复制。
 
 ## 接口格式
 
-| 模型 | 接口 | 请求地址 | API Key 厂商 |
+| 场景 | 接口 | 请求地址或 Base URL | API Key 厂商 |
 | - | - | - | - |
-| GPT 系列 | OpenAI Responses | `https://api.kuajieaigc.com/v1/responses` | OpenAI |
-| Claude 系列 | Anthropic Messages | `https://api.kuajieaigc.com/v1/messages` | Anthropic |
+| 国产模型、GPT、兼容 OpenAI 的模型 | OpenAI Chat Completions | `https://api.kuajieaigc.com/v1/chat/completions` | OpenAI |
+| Codex 等 Responses 客户端 | OpenAI Responses | `https://api.kuajieaigc.com/v1/responses` | OpenAI |
+| Claude Code、Claude 客户端 | Anthropic Messages | `https://api.kuajieaigc.com/v1/messages` | Anthropic |
+| Gemini 原生客户端 | Gemini | `https://api.kuajieaigc.com/v1beta/models/{model}:generateContent` | Gemini |
 
-请求头通过 `Authorization: Bearer your-api-key-here` 传入 API Key，Anthropic Messages 也支持 `x-api-key` 请求头
+请求头通过 `Authorization: Bearer your-api-key-here` 传入 API Key。Anthropic Messages 客户端也可以使用它要求的 `x-api-key` 形式。不同协议的地址不要混用。
+
+## Chat Completions
+
+国产模型和大多数桌面客户端使用 Chat Completions。完整的请求体、流式输出、工具调用、结构化输出、响应和错误说明见 [Chat Completions 参考](/api/chat-completions)。
+
+```bash
+curl --request POST \
+  --url https://api.kuajieaigc.com/v1/chat/completions \
+  --header 'Authorization: Bearer your-api-key-here' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "your-model-id",
+    "messages": [{"role": "user", "content": "你好"}]
+  }'
+```
 
 ## OpenAI Responses
 
@@ -127,6 +144,17 @@ console.log(message.content[0].text);
 ```
 
 将 `your-claude-model` 替换为要使用的 Claude 模型 ID
+
+## 地址检查
+
+| 你看到的配置字段 | 应填写 |
+| - | - |
+| OpenAI SDK `base_url` / `baseURL` | `https://api.kuajieaigc.com/v1` |
+| OpenAI 客户端完整 URL | `https://api.kuajieaigc.com/v1/chat/completions` |
+| 主机和路径分开 | 主机 `https://api.kuajieaigc.com`，路径 `/v1/chat/completions` |
+| Claude Code `ANTHROPIC_BASE_URL` | `https://api.kuajieaigc.com` |
+
+如果请求返回 `404`，先检查是否重复写入 `/v1`，或者把完整接口路径误填进了只接受 Base URL 的字段。
 
 ## 常见问题
 

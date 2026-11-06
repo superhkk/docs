@@ -23,7 +23,8 @@
       {
         "group": "API 与代码",
         "pages": [
-          "api/overview"
+          "api/overview",
+          "api/chat-completions"
         ]
       },
       {

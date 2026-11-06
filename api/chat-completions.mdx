@@ -1,0 +1,335 @@
+---
+title: "Chat Completions"
+description: "POST /v1/chat/completions：使用跨界 AI 的统一 OpenAI 兼容入口调用 DeepSeek、GLM、Kimi、Qwen 和其他模型。"
+sidebarTitle: "Chat Completions"
+---
+
+跨界 AI 的 Chat Completions 接口兼容 OpenAI Chat Completions 格式。国产模型、映射后的统一模型名和不同分组都通过同一个接口调用，客户端只需要填写模型广场中的模型 ID。
+
+## 接口
+
+<Badge>POST</Badge> `https://api.kuajieaigc.com/v1/chat/completions`
+
+| 项目 | 内容 |
+| - | - |
+| 协议 | HTTPS |
+| 请求体 | `application/json` |
+| 认证 | `Authorization: Bearer <API Key>` |
+| 模型 | 从[模型广场](https://www.kuajieaigc.com/pricing)复制实际模型 ID |
+| 流式输出 | `stream: true`，返回 `text/event-stream` |
+
+### 请求地址怎么填
+
+这是最容易出错的地方。根据客户端的字段类型选择对应写法：
+
+| 客户端字段 | 填写内容 |
+| - | - |
+| OpenAI SDK 的 `base_url` / `baseURL` | `https://api.kuajieaigc.com/v1` |
+| OpenAI 兼容客户端的完整接口地址 | `https://api.kuajieaigc.com/v1/chat/completions` |
+| 只有“API 主机”和“API 路径”两个字段 | 主机填 `https://api.kuajieaigc.com`，路径填 `/v1/chat/completions` |
+| Anthropic SDK、Claude Code 的 `base_url` / `ANTHROPIC_BASE_URL` | `https://api.kuajieaigc.com`，不要手动添加 `/v1` |
+| Gemini CLI 的 `GOOGLE_GEMINI_BASE_URL` | `https://api.kuajieaigc.com`，由客户端使用 `/v1beta` 路径 |
+
+不要把 `/v1/chat/completions` 再拼接到已经包含完整接口路径的字段中，也不要把 OpenAI 的 `/v1` 填到 Claude Code 的地址中。
+
+## 授权
+
+在[控制台](https://www.kuajieaigc.com/keys)创建 API Key，并在每次请求中发送：
+
+```http
+Authorization: Bearer your-api-key-here
+Content-Type: application/json
+```
+
+API Key 的厂商按客户端协议选择。使用 Chat Completions 调用国产模型时，选择控制台中的 OpenAI 兼容入口。API Key、密码和部署密钥不要写入公开仓库或前端代码。
+
+## 最小请求
+
+将 `your-model-id` 替换为模型广场复制的实际模型 ID。平台显示的统一模型名可能映射到不同上游渠道，客户端只发送平台模型 ID。
+
+<CodeGroup>
+
+```bash cURL
+curl --request POST \
+  --url https://api.kuajieaigc.com/v1/chat/completions \
+  --header 'Authorization: Bearer your-api-key-here' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "your-model-id",
+    "messages": [
+      {"role": "user", "content": "请用三句话介绍你自己。"}
+    ],
+    "temperature": 0.7,
+    "stream": false
+  }'
+```
+
+```python Python
+from openai import OpenAI
+
+client = OpenAI(
+    api_key="your-api-key-here",
+    base_url="https://api.kuajieaigc.com/v1",
+)
+
+completion = client.chat.completions.create(
+    model="your-model-id",
+    messages=[
+        {"role": "user", "content": "请用三句话介绍你自己。"},
+    ],
+    temperature=0.7,
+)
+
+print(completion.choices[0].message.content)
+```
+
+```javascript Node.js
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: "your-api-key-here",
+  baseURL: "https://api.kuajieaigc.com/v1",
+});
+
+const completion = await client.chat.completions.create({
+  model: "your-model-id",
+  messages: [{ role: "user", content: "请用三句话介绍你自己。" }],
+  temperature: 0.7,
+});
+
+console.log(completion.choices[0].message.content);
+```
+
+</CodeGroup>
+
+## 请求体
+
+### 必填参数
+
+<ParamField body="model" type="string" required>
+  模型 ID。请从模型广场复制，不能直接使用供应商后台的上游名称。模型映射、渠道和用户分组由平台在服务端处理。
+</ParamField>
+
+<ParamField body="messages" type="object[]" required>
+  对话消息数组。每条消息至少包含 `role` 和 `content`。常用角色为 `system`、`user`、`assistant` 和 `tool`。
+</ParamField>
+
+消息示例：
+
+```json
+[
+  {"role": "system", "content": "你是一个严谨的中文助手。"},
+  {"role": "user", "content": "比较两个方案的优缺点。"}
+]
+```
+
+`content` 可以是字符串，也可以是客户端支持的内容数组。图片、音频和工具调用是否可用，取决于所选模型和渠道。
+
+### 采样和长度
+
+<ParamField body="temperature" type="number" default="1">
+  采样温度，通常为 `0` 到 `2`。数值越高，输出随机性越强。
+</ParamField>
+
+<ParamField body="top_p" type="number" default="1">
+  核采样参数，通常为 `0` 到 `1`。一般只调整 `temperature` 或 `top_p` 其中一个。
+</ParamField>
+
+<ParamField body="n" type="integer" default="1">
+  生成候选数量。增加该值会增加模型输出和计费量。
+</ParamField>
+
+<ParamField body="max_tokens" type="integer">
+  最大补全 Token 数。兼容旧客户端和部分上游模型。
+</ParamField>
+
+<ParamField body="max_completion_tokens" type="integer">
+  最大补全 Token 数。优先使用支持该字段的模型和客户端。
+</ParamField>
+
+<ParamField body="stop" type="string|string[]">
+  停止序列。到达停止序列后，模型结束本次生成。
+</ParamField>
+
+<ParamField body="presence_penalty" type="number" default="0">
+  存在惩罚，通常为 `-2` 到 `2`。
+</ParamField>
+
+<ParamField body="frequency_penalty" type="number" default="0">
+  频率惩罚，通常为 `-2` 到 `2`。
+</ParamField>
+
+### 流式输出
+
+<ParamField body="stream" type="boolean" default="false">
+  设置为 `true` 时以 SSE 分块返回内容，适合聊天窗口逐字显示。
+</ParamField>
+
+<ParamField body="stream_options" type="object">
+  可设置 `include_usage: true`，请求在流末尾返回用量信息。是否返回用量取决于模型和上游响应。
+</ParamField>
+
+```bash
+curl --request POST \
+  --url https://api.kuajieaigc.com/v1/chat/completions \
+  --header 'Authorization: Bearer your-api-key-here' \
+  --header 'Content-Type: application/json' \
+  --no-buffer \
+  --data '{
+    "model": "your-model-id",
+    "messages": [{"role": "user", "content": "写一段产品介绍。"}],
+    "stream": true,
+    "stream_options": {"include_usage": true}
+  }'
+```
+
+流式响应使用 `data: ` 行传输 JSON 分块，以 `data: [DONE]` 结束。客户端应持续读取分块，不要把每个分块当成完整回答。
+
+### 工具调用
+
+<ParamField body="tools" type="object[]">
+  声明模型可以调用的函数工具。工具的具体执行仍由你的应用完成。
+</ParamField>
+
+<ParamField body="tool_choice" type="string|object">
+  工具选择策略，常见值为 `none`、`auto` 或 `required`，也可以指定具体函数。
+</ParamField>
+
+```json
+{
+  "model": "your-model-id",
+  "messages": [
+    {"role": "user", "content": "查询北京天气。"}
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "查询城市天气",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "city": {"type": "string"}
+          },
+          "required": ["city"]
+        }
+      }
+    }
+  ],
+  "tool_choice": "auto"
+}
+```
+
+如果模型返回 `tool_calls`，应用需要执行对应函数，再把结果以 `role: "tool"` 的消息追加到 `messages` 后重新请求。模型是否支持工具调用，以模型广场和实际返回为准。
+
+### 结构化输出与推理
+
+<ParamField body="response_format" type="object">
+  请求 JSON 或 JSON Schema 输出。只有支持该能力的模型会按指定格式返回。
+</ParamField>
+
+<ParamField body="reasoning_effort" type="string">
+  推理强度，常见值为 `low`、`medium`、`high`。仅对支持推理控制的模型生效。
+</ParamField>
+
+<ParamField body="seed" type="integer">
+  随机种子。是否保证可复现由模型和上游渠道决定。
+</ParamField>
+
+对于 DeepSeek、GLM、Kimi、Qwen 等国产模型，先以模型广场显示的能力和客户端实际兼容情况为准。平台会把可兼容的请求转换到渠道对应的上游格式，模型名称和渠道名称不会自动暴露给客户端。
+
+## 响应
+
+非流式成功响应的核心结构如下：
+
+```json
+{
+  "id": "chatcmpl-example",
+  "object": "chat.completion",
+  "created": 1730000000,
+  "model": "your-model-id",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "这是模型返回的内容。"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 20,
+    "completion_tokens": 12,
+    "total_tokens": 32
+  }
+}
+```
+
+<ResponseField name="id" type="string" required>
+  本次响应的唯一标识。
+</ResponseField>
+
+<ResponseField name="object" type="string" required>
+  Chat Completions 响应类型，通常为 `chat.completion`。
+</ResponseField>
+
+<ResponseField name="model" type="string" required>
+  实际用于计费和返回的模型标识。通常与请求中的平台模型 ID 对应。
+</ResponseField>
+
+<ResponseField name="choices" type="object[]" required>
+  模型候选结果。文本回答位于 `choices[0].message.content`，工具调用位于 `choices[0].message.tool_calls`。
+</ResponseField>
+
+<ResponseField name="usage" type="object">
+  用量信息，包括 `prompt_tokens`、`completion_tokens` 和 `total_tokens`。支持缓存计费的模型还可能返回缓存相关明细。
+</ResponseField>
+
+## 错误响应
+
+错误通常使用以下结构：
+
+```json
+{
+  "error": {
+    "message": "错误说明",
+    "type": "invalid_request_error",
+    "param": "model",
+    "code": "model_not_found"
+  }
+}
+```
+
+| 状态码 | 常见原因 | 处理方式 |
+| - | - | - |
+| `400` | 请求体格式、参数范围或模型能力不匹配 | 先用最小请求测试，再逐项加入工具、结构化输出或多模态字段 |
+| `401` | API Key 缺失、错误或已失效 | 检查 `Authorization: Bearer ...`，重新创建或更换 API Key |
+| `403` | 当前账户、Key 或分组无权使用该模型 | 在控制台检查 API Key 分组、订阅状态和模型可用范围 |
+| `404` | 地址或路径重复 | OpenAI SDK 使用 `https://api.kuajieaigc.com/v1`；完整请求使用 `/v1/chat/completions` |
+| `429` | 速率限制、余额不足或上游限流 | 降低并发，稍后重试，并检查余额和模型分组 |
+| `5xx` | 上游渠道或平台临时错误 | 记录响应中的 `id` 和时间，稍后重试或联系支持 |
+
+## 模型名、渠道和分组
+
+平台允许多个渠道映射到同一个用户可见模型。客户端请求时只填写模型广场中的统一模型 ID：
+
+1. 客户端发送 `model`。
+2. 平台根据 API Key、用户组和请求分组选择可用渠道。
+3. 渠道把统一模型 ID 映射为对应上游模型名。
+4. 响应以 OpenAI Chat Completions 格式返回。
+
+同一模型的忙时和闲时价格如果配置为不同分组，需要在客户端或 API Key 中选择对应分组。接口不会根据本地时间自动替换模型名。模型广场隐藏的上游模型名也不需要填写，直接请求平台公布的统一模型 ID 即可。
+
+## 相关接口
+
+| 用途 | 方法和路径 |
+| - | - |
+| 列出 OpenAI 兼容模型 | `GET https://api.kuajieaigc.com/v1/models` |
+| 查询单个模型 | `GET https://api.kuajieaigc.com/v1/models/{model}` |
+| OpenAI Responses | `POST https://api.kuajieaigc.com/v1/responses` |
+| Anthropic Messages | `POST https://api.kuajieaigc.com/v1/messages` |
+| Gemini 原生格式 | `POST https://api.kuajieaigc.com/v1beta/models/{model}:generateContent` |
+
+需要在 Codex、Claude Code、Gemini CLI 或桌面客户端中配置时，先看[请求地址和客户端配置](/quickstart/cli-setup)，再打开对应客户端页面。
