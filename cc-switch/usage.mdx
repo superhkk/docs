@@ -1,199 +1,84 @@
 ---
-title: "CC-Switch 使用指南"
-description: "CC-Switch 配置工具使用指南"
+title: "安装 CC Switch"
+description: "下载并安装 CC Switch，了解主界面与常用设置。"
 ---
 
+CC Switch 可以集中管理 Codex、Claude Code 和 Gemini CLI 的供应商配置。本文介绍安装流程和界面；接入跨界 AI 的具体步骤见 [Codex 配置指南](/codex/introduction) 和 [Claude Code 配置指南](/claude-code/introduction)。
 
+## 系统要求
 
-> CC-Switch 配置工具使用指南
+| 系统 | 要求 |
+| - | - |
+| Windows | Windows 10 及以上（x64 或 ARM64） |
+| macOS | macOS 12（Monterey）及以上，支持 Intel 和 Apple 芯片 |
+| Linux | x86_64 或 ARM64；需要 glibc 2.35+ 和 WebKitGTK 4.1 |
 
-以下界面截图用于展示 CC Switch 的操作位置。请按本页配置表填写跨界 AI 的官网、API 地址和模型 ID；不同版本的界面可能略有差异。
+## 一、下载安装包
 
-## 什么是 CC-Switch
+前往 [CC Switch GitHub Releases](https://github.com/farion1231/cc-switch/releases/latest)，选择与操作系统匹配的安装包。
 
-CC-Switch 是一款跨平台桌面应用，统一管理 Codex、Claude Code 和 Gemini CLI 三大 AI 编程工具
+<Frame caption="在 CC Switch GitHub Releases 页面选择对应系统的安装包。">
+  <img src="/images/clients/cc-switch/ccs-install-01-download.png" alt="在 GitHub Releases 页面下载对应系统的安装包" />
+</Frame>
 
-> [!WARNING]
->
-> **使用前提**：CC-Switch 仅管理 CLI 工具的配置，不负责安装 CLI 本身。使用前请确保已安装对应的 CLI 工具：
->
-> * [Codex 安装教程](/codex/introduction)
-> * [Claude Code 安装教程](/claude-code/introduction)
-> * [Gemini CLI 安装教程](/gemini/introduction)
+## 二、安装
 
-## 核心功能
+### Windows
 
-> **一键切换配置**
->
-> 快速切换不同 API 供应商配置
+- **安装版（.msi）**：双击安装包，按向导完成安装，然后从开始菜单启动 CC Switch。
+- **免安装版（Portable.zip）**：解压到任意文件夹，运行其中的 `cc-switch.exe`。
 
-> **可视化管理**
->
-> 图形界面管理所有配置，无需手动编辑文件
+如果系统显示安全提醒，请确认安装包来自上方 GitHub Releases 页面后再继续。
 
-> **MCP 服务器**
->
-> 集成 MCP 服务器管理功能
+### macOS
 
-> **系统托盘**
->
-> 常驻系统托盘，快捷操作
-
-> **本地代理**
->
-> 支持本地代理配置
-
-> **故障转移**
->
-> 自动检测并切换到可用配置
-
-## 软件下载
-
-**1. 访问下载页面**
-
-访问 [CC-Switch Release](https://github.com/farion1231/cc-switch/releases) 下载最新版本
-
-**2. 选择对应系统版本**
-
-* **Windows**：下载 `.msi` 安装包
-* **macOS**：下载 `.dmg` 安装包或使用 Homebrew 安装
-* **Linux**：下载 `.deb`、`.AppImage` 或使用 AUR 安装
-
-**3. 安装并启动**
-
-按照系统提示完成安装，启动 CC-Switch 应用
-
-<Accordion title="安装和界面操作截图（5 张）">
-  <Frame caption="在 GitHub Releases 页面按操作系统下载 CC Switch 安装包。">
-    <img src="/images/clients/cc-switch/ccs-install-01-download.png" alt="在 GitHub Releases 页面下载对应系统的安装包" />
-  </Frame>
-  <Frame caption="首次启动时阅读说明并确认。">
-    <img src="/images/clients/cc-switch/ccs-install-02-welcome.png" alt="CC Switch 首次启动欢迎说明" />
-  </Frame>
-  <Frame caption="CC Switch 主界面，可从左侧选择要配置的客户端。">
-    <img src="/images/clients/cc-switch/ccs-install-03-main.png" alt="CC Switch 主界面和客户端列表" />
-  </Frame>
-  <Frame caption="在设置中切换界面语言。">
-    <img src="/images/clients/cc-switch/ccs-install-04-language.png" alt="在 CC Switch 设置中切换界面语言" />
-  </Frame>
-  <Frame caption="在关于页面查看版本并检查更新。">
-    <img src="/images/clients/cc-switch/ccs-install-05-about.png" alt="在 CC Switch 关于页面查看版本并检查更新" />
-  </Frame>
-</Accordion>
-
-## 配置步骤
-
-### 步骤一：选择 CLI 工具
-
-打开 CC-Switch，选择要配置的供应商，点击 + 按钮
-
-### 步骤二：添加配置
-
-**Codex**
-
-填写以下配置信息：
-
-* **供应商名称**：自定义名称，例如 `跨界AI`
-* **备注**：可选，用于标识用途，例如 `公司专用账号`
-* **官网链接**：`https://www.kuajieaigc.com`
-* **API Key**：从控制台生成的密钥（[如何生成](/quickstart/api-key)）
-* **API 请求地址**：`https://api.kuajieaigc.com/v1`
-* **模型名称**：从[模型广场](https://www.kuajieaigc.com/pricing)复制实际模型 ID
-
-<Accordion title="Codex 添加供应商与启用截图（8 张）">
-  <Frame caption="在 CC Switch 左侧选择 Codex，开始添加供应商。">
-    <img src="/images/clients/cc-switch/codex-01-add.png" alt="选择 Codex 并点击添加供应商" />
-  </Frame>
-  <Frame caption="在供应商模板中选择自定义配置。">
-    <img src="/images/clients/cc-switch/codex-02-custom.png" alt="为 Codex 选择自定义配置" />
-  </Frame>
-  <Frame caption="填写供应商名称、官网、API Key 和请求地址；请使用本站配置表中的值。">
-    <img src="/images/clients/cc-switch/codex-03-form.png" alt="填写 Codex 供应商基本信息和 API 请求地址" />
-  </Frame>
-  <Frame caption="按需配置端点并测速；本站地址请使用上方配置表中的值。">
-    <img src="/images/clients/cc-switch/codex-04-endpoints.png" alt="配置 Codex 端点并进行测速" />
-  </Frame>
-  <Frame caption="设置默认模型与模型列表；模型 ID 从本站模型广场复制。">
-    <img src="/images/clients/cc-switch/codex-05-models.png" alt="设置 Codex 默认模型和模型列表" />
-  </Frame>
-  <Frame caption="检查 CC Switch 自动生成的 auth.json 和 config.toml。">
-    <img src="/images/clients/cc-switch/codex-06-config.png" alt="检查 Codex 自动生成的配置" />
-  </Frame>
-  <Frame caption="添加后启用该供应商。">
-    <img src="/images/clients/cc-switch/codex-07-enable.png" alt="在 CC Switch 中启用 Codex 供应商" />
-  </Frame>
-  <Frame caption="启用后按提示重启 Codex。">
-    <img src="/images/clients/cc-switch/codex-08-active.png" alt="CC Switch 显示 Codex 供应商正在使用" />
-  </Frame>
-</Accordion>
-
-**Claude Code**
-
-填写以下配置信息：
-
-* **供应商名称**：自定义名称，例如 `跨界AI`
-* **备注**：可选，用于标识用途，例如 `公司专用账号`
-* **官网链接**：`https://www.kuajieaigc.com`
-* **API Key**：从控制台生成的密钥（[如何生成](/quickstart/api-key)）
-* **请求地址**：`https://api.kuajieaigc.com`
-* **API 格式**：默认选择 `Anthropic Messages (原生)`
-
-<Accordion title="Claude Code 添加供应商与启用截图（9 张）">
-  <Frame caption="在 CC Switch 左侧选择 Claude Code，开始添加供应商。">
-    <img src="/images/clients/cc-switch/claude-code-01-add.png" alt="选择 Claude Code 并点击添加供应商" />
-  </Frame>
-  <Frame caption="在供应商模板中选择自定义配置。">
-    <img src="/images/clients/cc-switch/claude-code-02-custom.png" alt="为 Claude Code 选择自定义配置" />
-  </Frame>
-  <Frame caption="填写供应商名称、官网、API Key 和请求地址；请使用本站配置表中的值。">
-    <img src="/images/clients/cc-switch/claude-code-03-form.png" alt="填写 Claude Code 供应商基本信息和请求地址" />
-  </Frame>
-  <Frame caption="按需设置端点并测速；本站 API 地址请使用上方配置表中的值。">
-    <img src="/images/clients/cc-switch/claude-code-04-endpoints.png" alt="为 Claude Code 添加端点并测速" />
-  </Frame>
-  <Frame caption="高级选项可先保持默认，确认后再按需调整。">
-    <img src="/images/clients/cc-switch/claude-code-05-advanced.png" alt="检查 Claude Code 高级选项" />
-  </Frame>
-  <Frame caption="检查自动生成的 Claude Code 配置 JSON 后添加供应商。">
-    <img src="/images/clients/cc-switch/claude-code-06-json.png" alt="检查 Claude Code 自动生成的配置 JSON" />
-  </Frame>
-  <Frame caption="添加后点击启用，切换到该供应商。">
-    <img src="/images/clients/cc-switch/claude-code-07-enable.png" alt="在 CC Switch 中启用 Claude Code 供应商" />
-  </Frame>
-  <Frame caption="确认 CC Switch 显示该供应商正在使用。">
-    <img src="/images/clients/cc-switch/claude-code-08-active.png" alt="CC Switch 显示 Claude Code 供应商正在使用" />
-  </Frame>
-  <Frame caption="需要调用国产模型时，可按需设置模型映射；使用本站模型 ID。">
-    <img src="/images/clients/cc-switch/claude-code-09-cn-models.png" alt="在 Claude Code 的模型映射中配置国产模型" />
-  </Frame>
-</Accordion>
-
-**Gemini**
-
-填写以下配置信息：
-
-* **供应商名称**：自定义名称，例如 `跨界AI`
-* **备注**：可选，用于标识用途，例如 `公司专用账号`
-* **官网链接**：`https://www.kuajieaigc.com`
-* **API Key**：从控制台生成的密钥（[如何生成](/quickstart/api-key)）
-* **请求地址**：`https://api.kuajieaigc.com`
-* **模型**：从[模型广场](https://www.kuajieaigc.com/pricing)复制实际模型 ID
-
-### 步骤三：验证配置
-
-打开终端，运行以下命令测试：
+也可以使用 Homebrew 安装：
 
 ```bash theme={null}
-# Codex
-codex "hello"
-
-# Claude Code
-claude "hello"
-
-# Gemini CLI
-gemini "hello"
+brew install --cask cc-switch
 ```
 
-## 用量查询
+下载 `.dmg` 安装包时，打开后将 CC Switch 拖入“应用程序”文件夹。
 
-在[跨界AI控制台](https://www.kuajieaigc.com/wallet)查看账户余额和用量。客户端自定义用量查询依赖服务端提供的专用接口；请勿直接套用其他服务商的提取器配置。
+### Linux
+
+根据发行版选择 GitHub Releases 中提供的 `.deb`、`.rpm` 或 `.AppImage` 安装包。Debian/Ubuntu 可使用 `apt` 安装 `.deb`，Fedora/RHEL 可使用 `dnf` 安装 `.rpm`；AppImage 需要先添加可执行权限后运行。
+
+## 三、首次启动
+
+首次启动时阅读欢迎说明并确认。若之前已经配置过 Codex 或 Claude Code，CC Switch 可以导入现有配置；导入前请核对客户端当前配置是否已备份。
+
+<Frame caption="首次启动 CC Switch 时显示的欢迎说明。">
+  <img src="/images/clients/cc-switch/ccs-install-02-welcome.png" alt="CC Switch 首次启动欢迎说明" />
+</Frame>
+
+## 四、认识主界面
+
+左侧栏用于选择要配置的客户端；选中客户端后，可在主区域添加和切换供应商。各客户端的供应商列表分别管理。
+
+<Frame caption="CC Switch 主界面及客户端列表。">
+  <img src="/images/clients/cc-switch/ccs-install-03-main.png" alt="CC Switch 主界面和客户端列表" />
+</Frame>
+
+## 五、常用设置
+
+### 切换界面语言
+
+在设置中选择界面语言，按提示应用更改。
+
+<Frame caption="在 CC Switch 设置中切换界面语言。">
+  <img src="/images/clients/cc-switch/ccs-install-04-language.png" alt="在 CC Switch 设置中切换界面语言" />
+</Frame>
+
+### 查看版本与检查更新
+
+打开“关于”页面查看当前版本，并按页面提示检查更新。
+
+<Frame caption="在 CC Switch 关于页面查看版本并检查更新。">
+  <img src="/images/clients/cc-switch/ccs-install-05-about.png" alt="在 CC Switch 关于页面查看版本并检查更新" />
+</Frame>
+
+## 下一步
+
+- [通过 CC Switch 接入 Codex](/codex/introduction)
+- [通过 CC Switch 接入 Claude Code](/claude-code/introduction)
