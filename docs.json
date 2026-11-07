@@ -41,22 +41,150 @@
       {
         "tab": "API 参考",
         "icon": "braces",
-        "pages": [
-          "api/overview"
+        "groups": [
+          {
+            "group": "开始",
+            "pages": [
+              "api/overview"
+            ]
+          },
+          {
+            "group": "模型",
+            "pages": [
+              "api/models/list"
+            ]
+          },
+          {
+            "group": "聊天",
+            "pages": [
+              "api/chat-completions",
+              "api/responses",
+              "api/messages",
+              "api/gemini"
+            ]
+          },
+          {
+            "group": "补全",
+            "pages": [
+              "api/completions"
+            ]
+          },
+          {
+            "group": "嵌入",
+            "pages": [
+              "api/embeddings"
+            ]
+          },
+          {
+            "group": "重排序",
+            "pages": [
+              "api/rerank"
+            ]
+          },
+          {
+            "group": "内容审查",
+            "pages": [
+              "api/moderations"
+            ]
+          },
+          {
+            "group": "图像",
+            "pages": [
+              "api/images"
+            ]
+          },
+          {
+            "group": "音频",
+            "pages": [
+              "api/audio"
+            ]
+          },
+          {
+            "group": "实时",
+            "pages": [
+              "api/realtime"
+            ]
+          },
+          {
+            "group": "视频",
+            "pages": [
+              "api/videos"
+            ]
+          },
+          {
+            "group": "完整接口目录",
+            "openapi": "openapi/relay.json"
+          }
         ]
       },
       {
         "tab": "管理接口",
         "icon": "key-round",
-        "pages": [
-          "manage/overview"
+        "groups": [
+          {
+            "group": "开始",
+            "pages": [
+              "manage/overview"
+            ]
+          }
         ]
       },
       {
         "tab": "场景示例",
         "icon": "layout-grid",
-        "pages": [
-          "cc-switch/usage"
+        "groups": [
+          {
+            "group": "AI 编程工具",
+            "pages": [
+              "cc-switch/usage",
+              "claude-code/introduction",
+              "codex/introduction",
+              "gemini/introduction",
+              "clients/deepseek-harness",
+              "clients/factory-droid-cli"
+            ]
+          },
+          {
+            "group": "AI 客户端",
+            "pages": [
+              "clients/cherry-studio",
+              "clients/deepchat",
+              "clients/aionui",
+              "clients/aqbot",
+              "clients/chatbox",
+              "claude-desktop/introduction"
+            ]
+          },
+          {
+            "group": "机器人与智能体",
+            "pages": [
+              "clients/openclaw",
+              "clients/langbot",
+              "clients/astrbot",
+              "clients/memoh"
+            ]
+          },
+          {
+            "group": "翻译工具",
+            "pages": [
+              "clients/fluentread",
+              "clients/luna-translator"
+            ]
+          },
+          {
+            "group": "其他环境",
+            "pages": [
+              "clients/opencode",
+              "clients/jetbrains",
+              "codex/chatgpt-app",
+              "codex/vscode",
+              "codex/faq",
+              "claude-code/faq",
+              "gemini/faq",
+              "claude-desktop/faq",
+              "environment/setup"
+            ]
+          }
         ]
       },
       {
@@ -70,7 +198,10 @@
         "tab": "条款与政策",
         "icon": "scale",
         "pages": [
-          "legal/terms"
+          "legal/terms",
+          "legal/privacy",
+          "legal/refund",
+          "legal/usage"
         ]
       }
     ]
