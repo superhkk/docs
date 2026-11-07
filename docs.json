@@ -9,108 +9,68 @@
   },
   "favicon": "/favicon.png",
   "navigation": {
-    "groups": [
+    "tabs": [
       {
-        "group": "跨界 AI 文档",
-        "pages": [
-          "index",
-          "guide/endpoints",
-          "user/models",
-          "user/auth",
-          "user/dashboard",
-          "user/token",
-          "user/wallet",
-          "user/log",
-          "user/profile",
-          "user/pricing",
-          "user/playground",
-          "user/chat-apps"
+        "tab": "用户指南",
+        "icon": "book-open",
+        "groups": [
+          {
+            "group": "开始",
+            "pages": [
+              "index",
+              "guide/endpoints",
+              "user/models"
+            ]
+          },
+          {
+            "group": "控制台",
+            "pages": [
+              "user/auth",
+              "user/dashboard",
+              "user/token",
+              "user/wallet",
+              "user/log",
+              "user/profile",
+              "user/pricing",
+              "user/playground",
+              "user/chat-apps"
+            ]
+          }
         ]
       },
       {
-        "group": "快速开始",
+        "tab": "API 参考",
+        "icon": "braces",
         "pages": [
-          "quickstart/register",
-          "quickstart/recharge",
-          "quickstart/api-key",
-          "quickstart/cli-setup"
+          "api/overview"
         ]
       },
       {
-        "group": "API 使用指南",
-        "pages": [
-          "api/overview",
-          "api/models/list",
-          "api/chat-completions",
-          "api/responses",
-          "api/messages",
-          "api/gemini",
-          "api/completions",
-          "api/embeddings",
-          "api/rerank",
-          "api/moderations",
-          "api/images",
-          "api/audio",
-          "api/realtime",
-          "api/videos"
-        ]
-      },
-      {
-        "group": "API 接口目录",
-        "openapi": "openapi/relay.json"
-      },
-      {
-        "group": "管理 API",
+        "tab": "管理接口",
+        "icon": "key-round",
         "pages": [
           "manage/overview"
         ]
       },
       {
-        "group": "开发工具",
+        "tab": "场景示例",
+        "icon": "layout-grid",
         "pages": [
-          "cc-switch/usage",
-          "claude-code/introduction",
-          "claude-code/faq",
-          "codex/introduction",
-          "codex/chatgpt-app",
-          "codex/vscode",
-          "codex/faq",
-          "gemini/introduction",
-          "gemini/faq",
-          "clients/deepseek-harness",
-          "clients/factory-droid-cli"
+          "cc-switch/usage"
         ]
       },
       {
-        "group": "应用接入",
+        "tab": "常见问题",
+        "icon": "circle-question-mark",
         "pages": [
-          "clients/cherry-studio",
-          "clients/chatbox",
-          "clients/deepchat",
-          "clients/aionui",
-          "clients/aqbot",
-          "clients/openclaw",
-          "clients/langbot",
-          "clients/astrbot",
-          "clients/memoh",
-          "clients/fluentread",
-          "clients/luna-translator",
-          "clients/opencode",
-          "clients/jetbrains",
-          "claude-desktop/introduction",
-          "claude-desktop/faq",
-          "environment/setup"
+          "faq"
         ]
       },
       {
-        "group": "帮助与政策",
+        "tab": "条款与政策",
+        "icon": "scale",
         "pages": [
-          "faq",
-          "help/contact",
-          "legal/terms",
-          "legal/privacy",
-          "legal/refund",
-          "legal/usage"
+          "legal/terms"
         ]
       }
     ]
