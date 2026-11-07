@@ -250,6 +250,65 @@
     },
     "links": [
       {
+        "label": "跨界 AI",
+        "items": [
+          {
+            "label": "官网与控制台",
+            "href": "https://www.kuajieaigc.com"
+          },
+          {
+            "label": "模型广场",
+            "href": "https://www.kuajieaigc.com/pricing"
+          },
+          {
+            "label": "API 地址",
+            "href": "https://api.kuajieaigc.com"
+          }
+        ]
+      },
+      {
+        "label": "开发者",
+        "items": [
+          {
+            "label": "API 参考",
+            "href": "/api/overview"
+          },
+          {
+            "label": "接入地址速查",
+            "href": "/guide/endpoints"
+          },
+          {
+            "label": "模型说明",
+            "href": "/user/models"
+          },
+          {
+            "label": "常见问题",
+            "href": "/faq"
+          }
+        ]
+      },
+      {
+        "label": "支持与政策",
+        "items": [
+          {
+            "label": "联系支持",
+            "href": "/help/contact"
+          },
+          {
+            "label": "服务条款",
+            "href": "/legal/terms"
+          },
+          {
+            "label": "隐私政策",
+            "href": "/legal/privacy"
+          },
+          {
+            "label": "退款规则",
+            "href": "/legal/refund"
+          }
+        ]
+      },
+      {
         "label": "备案信息",
         "items": [
           {
